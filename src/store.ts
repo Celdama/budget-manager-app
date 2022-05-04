@@ -1,13 +1,31 @@
+import { nanoid } from 'nanoid';
 import create from 'zustand';
 
-interface BearState {
-  bears: number
-  increase: (by: number) => void
+import { Todo } from './model/Todo';
+
+interface TodoState {
+  todos: Todo[],
+  addTodo: (description: string) => void,
+  deleteTodo: (id: string) => void
 }
 
-const useStore = create<BearState>((set) => ({
-  bears: 0,
-  increase: (by) => set((state) => ({ bears: state.bears + by })),
+export const useStore = create<TodoState>((set) => ({
+  todos: [],
+  addTodo: (description: string) => {
+    set((state) => ({
+      todos: [
+        ...state.todos,
+        {
+          id: nanoid(),
+          description,
+          completed: false,
+        } as Todo,
+      ],
+    }));
+  },
+  deleteTodo: (id: string) => {
+    set((state) => ({
+      todos: state.todos.filter((todo) => todo.id !== id),
+    }));
+  },
 }));
-
-export default useStore;
