@@ -1,12 +1,12 @@
-import TestComponent  from './components/TestComponent'
+import { ReactElement } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Budget Manager App</h1>
-      <TestComponent />
-    </div>
-  );
-}
+import TestComponent from './components/TestComponent';
+
+const App = (): ReactElement => (
+  <div className="App">
+    <h1>Budget Manager App</h1>
+    <TestComponent />
+  </div>
+);
 
 export default App;
