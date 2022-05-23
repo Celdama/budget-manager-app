@@ -51,7 +51,8 @@
         "namedComponents": "arrow-function",
         "unamedComponents": "arrow-function"
       }
-    ]
+    ],
+    "object-curly-newline": 0
   },
   "settings": {
     "import/resolver": {
