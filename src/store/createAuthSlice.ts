@@ -26,7 +26,9 @@ const createAuthUserSlice = (
       registerEmail,
       registerPassword,
     );
-    set({ authUser: await userCredential });
+
+    const { email, uid } = userCredential.user;
+    set({ authUser: { email, uid, displayName: '', photoURL: '' } });
   },
 });
 
