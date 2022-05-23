@@ -18,12 +18,11 @@ export const TestLog = (): ReactElement => {
       const newUser = {
         email,
         uid: nanoid(),
-        password,
         displayName: userName,
         photoURL: avatar,
       };
 
-      await registerUser(newUser);
+      await registerUser(newUser, password);
       setEmail('');
       setPassword('');
       setUserName('');
