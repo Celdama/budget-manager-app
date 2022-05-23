@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 
 import { auth } from '../config/firebaseConfig';
 import { NamedSetState } from './middlewares/middleware';
@@ -7,7 +7,7 @@ import { MyState } from './useStore';
 
 export interface AuthUserSlice {
   authUser: object;
-  registerUser: (registerEmail: string, registerPassword: string) => void
+  registerUser: (registerEmail: string, registerPassword: string, userName: string, avatar: string) => void;
 }
 
 const createAuthUserSlice = (
@@ -20,7 +20,12 @@ const createAuthUserSlice = (
     displayName: '',
     photoURL: '',
   },
-  registerUser: async (registerEmail: string, registerPassword: string) => {
+  registerUser: async (
+    registerEmail: string,
+    registerPassword: string,
+    userName: string,
+    avatar: string,
+  ) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       registerEmail,
@@ -28,7 +33,14 @@ const createAuthUserSlice = (
     );
 
     const { email, uid } = userCredential.user;
-    set({ authUser: { email, uid, displayName: '', photoURL: '' } });
+    await updateProfile(userCredential.user, {
+      displayName: userName,
+      photoURL: avatar,
+    });
+    set({ authUser: { email, uid, displayName: userName, photoURL: avatar } });
+
+    const test = getAuth();
+    console.log(test);
   },
 });
 

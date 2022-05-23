@@ -5,14 +5,20 @@ import useStore from '../../store/useStore';
 export const TestLog = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [avatar, setAvatar] = useState('');
   const { registerUser } = useStore();
 
-  const handleRegisterUser = (e: MouseEvent<HTMLButtonElement>): void => {
+  const handleRegisterUser = async (
+    e: MouseEvent<HTMLButtonElement>,
+  ): Promise<void> => {
     e.preventDefault();
     if (email.length && password.length) {
-      registerUser(email, password);
+      await registerUser(email, password, userName, avatar);
       setEmail('');
       setPassword('');
+      setUserName('');
+      setAvatar('');
     }
   };
 
@@ -34,6 +40,23 @@ export const TestLog = (): ReactElement => {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <br />
+        <input
+          className="outline m-4"
+          type="text"
+          name="userName"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <br />
+        <input
+          className="outline m-4"
+          type="text"
+          name="avatar"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
         />
         <br />
         <button type="submit" onClick={(e) => handleRegisterUser(e)}>
