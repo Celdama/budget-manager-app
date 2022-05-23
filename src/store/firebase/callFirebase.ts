@@ -12,7 +12,7 @@ import { User } from '../../model/User';
 //   return res;
 // };
 
-export const addUser = async (user: User): Promise<User> => {
+export const addUserToFirebase = async (user: User): Promise<User> => {
   const { uid } = user;
   try {
     await setDoc(doc(db, 'users', uid), {

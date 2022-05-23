@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { User } from '../model/User';
-import { addUser } from './firebase/callFirebase';
+import { addUserToFirebase } from './firebase/callFirebase';
 import { NamedSetState } from './middlewares/middleware';
 import { MyState } from './useStore';
 
@@ -15,7 +15,7 @@ const createUserSlice = (
 ) => ({
   users: [],
   addUser: async (user: User) => {
-    await addUser(user);
+    await addUserToFirebase(user);
     set(({ users }) => ({ users: [...users, user] }), false, 'users.addUser');
   },
 });
