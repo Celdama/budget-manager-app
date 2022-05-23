@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { AuthUser } from '../model/AuthUser';
-import { registerUserToFirebase } from './firebase/callFirebase';
+import { registerUserToFirebase, signInUserToFirebase } from './firebase/callFirebase';
 import { NamedSetState } from './middlewares/middleware';
 import { MyState } from './useStore';
 
@@ -20,7 +20,8 @@ const createAuthUserSlice = (
     set({ authUser: user }, false, 'authUser.registerUser');
   },
   signInUser: async (email: string, password: string) => {
-    await signInUserToFirebase(email, password);
+    const signInUser = await signInUserToFirebase(email, password);
+    set({ authUser: signInUser }, false, 'authUser.signInUser');
   },
 });
 
