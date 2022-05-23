@@ -2,12 +2,13 @@
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 
 import { auth } from '../config/firebaseConfig';
+import { AuthUser } from '../model/AuthUser';
 import { NamedSetState } from './middlewares/middleware';
 import { MyState } from './useStore';
 
 export interface AuthUserSlice {
   authUser: object;
-  registerUser: (registerEmail: string, registerPassword: string, userName: string, avatar: string) => void;
+  registerUser: (user: AuthUser) => void;
 }
 
 const createAuthUserSlice = (

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { MouseEvent, ReactElement, useState } from 'react';
 
 import useStore from '../../store/useStore';
@@ -14,7 +15,15 @@ export const TestLog = (): ReactElement => {
   ): Promise<void> => {
     e.preventDefault();
     if (email.length && password.length) {
-      await registerUser(email, password, userName, avatar);
+      const newUser = {
+        email,
+        uid: nanoid(),
+        password,
+        displayName: userName,
+        photoURL: avatar,
+      };
+
+      await registerUser(newUser);
       setEmail('');
       setPassword('');
       setUserName('');
