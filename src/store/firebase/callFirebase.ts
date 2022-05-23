@@ -57,16 +57,22 @@ export const registerUserToFirebase = async (
 };
 
 export const signInUserToFirebase = async (
-  email: string,
-  password: string,
+  signInEmail: string,
+  signInPassword: string,
 ): Promise<object> => {
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
-      email,
-      password,
+      signInEmail,
+      signInPassword,
     );
-    return userCredential.user;
+    const { email, uid, displayName, photoURL } = userCredential.user;
+    return {
+      email,
+      uid,
+      displayName,
+      photoURL,
+    };
   } catch (err) {
     return Promise.reject(new Error('sign in user to firebase failed'));
   }

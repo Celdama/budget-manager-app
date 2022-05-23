@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 
 import TestComponent from './components/TestComponent';
 import { TestLog } from './components/TestLog';
+import TestSignIn from './components/TestSignIn';
 
 const App = (): ReactElement => (
   <div className="App">
@@ -11,6 +12,11 @@ const App = (): ReactElement => (
     <br />
     <br />
     <TestLog />
+    <br />
+    <br />
+    <br />
+    <br />
+    <TestSignIn />
   </div>
 );
 
