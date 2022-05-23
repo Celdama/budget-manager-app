@@ -1,4 +1,4 @@
-export interface transaction {
+export interface Transaction {
   uid: string,
   name: string,
   amount: number,
