@@ -8,7 +8,7 @@ import { MyState } from './useStore';
 
 export interface AuthUserSlice {
   authUser: object;
-  registerUser: (user: AuthUser) => void;
+  registerUser: (user: AuthUser, password: string) => void;
 }
 
 const createAuthUserSlice = (
@@ -21,11 +21,11 @@ const createAuthUserSlice = (
     displayName: '',
     photoURL: '',
   },
-  registerUser: async (user: AuthUser) => {
+  registerUser: async (user: AuthUser, password: string) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       user.email,
-      user.password,
+      password,
     );
 
     const { email, uid } = userCredential.user;
