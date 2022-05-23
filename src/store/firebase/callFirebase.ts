@@ -34,7 +34,10 @@ export const addTransactionToFirebase = async (
   }
 };
 
-export const registerUserToFirebase = async (user: AuthUser, password: string): Promise<object> => {
+export const registerUserToFirebase = async (
+  user: AuthUser,
+  password: string,
+): Promise<object> => {
   const { email, displayName, photoURL } = user;
   try {
     const userCredential = await createUserWithEmailAndPassword(

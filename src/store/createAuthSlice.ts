@@ -7,6 +7,7 @@ import { MyState } from './useStore';
 export interface AuthUserSlice {
   authUser: object;
   registerUser: (user: AuthUser, password: string) => void;
+  signInUser: (email: string, password: string) => void
 }
 
 const createAuthUserSlice = (
@@ -17,6 +18,9 @@ const createAuthUserSlice = (
   registerUser: async (user: AuthUser, password: string) => {
     await registerUserToFirebase(user, password);
     set({ authUser: user }, false, 'authUser.registerUser');
+  },
+  signInUser: async (email: string, password: string) => {
+    await signInUserToFirebase(email, password);
   },
 });
 
