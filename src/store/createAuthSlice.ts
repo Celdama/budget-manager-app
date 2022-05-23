@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { AuthUser } from '../model/AuthUser';
 import { registerUserToFirebase, signInUserToFirebase } from './firebase/callFirebase';

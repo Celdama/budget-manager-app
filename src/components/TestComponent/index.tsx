@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
+import { nanoid } from 'nanoid';
 import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 
 import useStore from '../../store/useStore';
@@ -16,9 +17,9 @@ const TestComponent = (): ReactElement => {
       const newTransaction = {
         amount: 400,
         category: 'expenses',
-        date: 'today',
+        date: new Date().toString(),
         name: transactionTitle,
-        uid: 'fddsfdqsdsqfd',
+        uid: nanoid(),
         userId: 'OEcO44NJyZPqSaH52IpL',
       };
       // LE TRUC C4EST QUE MAINTENANT, JE VAIS DEVOIR TROUVER L'ID DE L'USER EN QUESTION
