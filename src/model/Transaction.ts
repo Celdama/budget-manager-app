@@ -3,5 +3,6 @@ export interface Transaction {
   name: string,
   amount: number,
   date: string,
-  category: string
+  category: string,
+  userId: string
 }
