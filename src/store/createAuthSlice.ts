@@ -21,24 +21,26 @@ const createAuthUserSlice = (
     displayName: '',
     photoURL: '',
   },
-  registerUser: async (
-    registerEmail: string,
-    registerPassword: string,
-    userName: string,
-    avatar: string,
-  ) => {
+  registerUser: async (user: AuthUser) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
-      registerEmail,
-      registerPassword,
+      user.email,
+      user.password,
     );
 
     const { email, uid } = userCredential.user;
     await updateProfile(userCredential.user, {
-      displayName: userName,
-      photoURL: avatar,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
     });
-    set({ authUser: { email, uid, displayName: userName, photoURL: avatar } });
+    set({
+      authUser: {
+        email,
+        uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      },
+    }, false, 'authUser.registerUser');
 
     const test = getAuth();
     console.log(test);
