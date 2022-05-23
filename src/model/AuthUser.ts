@@ -3,5 +3,4 @@ export interface AuthUser {
   uid: string,
   displayName: string,
   photoURL: string,
-  password: string
 }
