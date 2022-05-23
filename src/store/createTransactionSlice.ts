@@ -4,7 +4,6 @@ import { addTransactionToFirebase } from './firebase/callFirebase';
 import { NamedSetState } from './middlewares/middleware';
 import { MyState } from './useStore';
 
-
 export interface TransactionSlice {
   transactions: Transaction[];
   addTransaction: (transaction: Transaction) => void;
