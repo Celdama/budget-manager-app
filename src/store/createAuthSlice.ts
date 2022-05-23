@@ -15,32 +15,20 @@ const createAuthUserSlice = (
   set: NamedSetState<MyState>,
   get: NamedSetState<MyState>,
 ) => ({
-  authUser: {
-    email: '',
-    uid: '',
-    displayName: '',
-    photoURL: '',
-  },
+  authUser: {},
   registerUser: async (user: AuthUser, password: string) => {
+    const { email, displayName, photoURL } = user;
     const userCredential = await createUserWithEmailAndPassword(
       auth,
-      user.email,
+      email,
       password,
     );
 
-    const { email, uid } = userCredential.user;
     await updateProfile(userCredential.user, {
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      displayName,
+      photoURL,
     });
-    set({
-      authUser: {
-        email,
-        uid,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-      },
-    }, false, 'authUser.registerUser');
+    set({ authUser: user }, false, 'authUser.registerUser');
 
     const test = getAuth();
     console.log(test);
