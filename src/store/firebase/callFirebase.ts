@@ -1,53 +1,25 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable prefer-promise-reject-errors */
-import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 import { db } from '../../config/firebaseConfig';
-import { Todo } from '../../model/Todo';
+import { User } from '../../model/User';
 
-export const getTodosFromFirebase = async (): Promise<Todo[]> => {
-  const todosCollectionRef = collection(db, 'todos');
-  const data = await getDocs(todosCollectionRef);
-  const res: Todo[] = data.docs.map((doc) => doc.data() as Todo);
-  return res;
-};
+// export const getTodosFromFirebase = async (): Promise<Todo[]> => {
+//   const todosCollectionRef = collection(db, 'todos');
+//   const data = await getDocs(todosCollectionRef);
+//   const res: Todo[] = data.docs.map((doc) => doc.data() as Todo);
+//   return res;
+// };
 
-export const addTodoToFirebase = async (todo: Todo): Promise<Todo> => {
-  const { id } = todo;
+export const addUser = async (user: User): Promise<User> => {
+  const { uid } = user;
   try {
-    await setDoc(doc(db, 'todos', id), {
-      ...todo,
+    await setDoc(doc(db, 'users', uid), {
+      ...user,
     });
-    return todo;
+    return user;
   } catch (err) {
-    return Promise.reject(new Error('fail'));
-  }
-};
-
-export const deleteTodoFromFirebase = async (
-  deleteId: string,
-): Promise<string> => {
-  try {
-    await deleteDoc(doc(db, 'todos', deleteId));
-    return deleteId;
-  } catch (err) {
-    return Promise.reject(new Error('fail'));
-  }
-};
-
-export const toggleCompleteTodoToFirebase = async (
-  todo: Todo,
-): Promise<Todo> => {
-  const { id: toggledTodoId, completed } = todo;
-  const todoDocRef = doc(db, 'todos', toggledTodoId);
-
-  try {
-    await updateDoc(todoDocRef, {
-      ...todo,
-      completed: !completed,
-    });
-    return todo;
-  } catch (error) {
     return Promise.reject(new Error('fail'));
   }
 };
