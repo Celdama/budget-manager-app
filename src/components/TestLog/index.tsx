@@ -23,6 +23,7 @@ export const TestLog = (): ReactElement => {
       };
 
       await registerUser(newUser, password);
+      // ADD NEW USER FROM HERE IN FIRESTORE DB
       setEmail('');
       setPassword('');
       setUserName('');

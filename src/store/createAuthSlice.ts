@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
-
-import { auth } from '../config/firebaseConfig';
 import { AuthUser } from '../model/AuthUser';
+import { registerUserToFirebase } from './firebase/callFirebase';
 import { NamedSetState } from './middlewares/middleware';
 import { MyState } from './useStore';
 
@@ -17,21 +15,8 @@ const createAuthUserSlice = (
 ) => ({
   authUser: {},
   registerUser: async (user: AuthUser, password: string) => {
-    const { email, displayName, photoURL } = user;
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-
-    await updateProfile(userCredential.user, {
-      displayName,
-      photoURL,
-    });
+    await registerUserToFirebase(user, password);
     set({ authUser: user }, false, 'authUser.registerUser');
-
-    const test = getAuth();
-    console.log(test);
   },
 });
 
