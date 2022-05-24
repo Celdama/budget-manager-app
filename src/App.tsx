@@ -1,13 +1,17 @@
-import { ReactElement } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import TestComponent from './components/TestComponent';
 import { TestLog } from './components/TestLog';
 import TestSignIn from './components/TestSignIn';
+import { Home } from './pages/Home';
 
-const App = (): ReactElement => (
+const App = (): JSX.Element => (
   <div className="App">
-    <h1>Budget Manager App</h1>
-    <TestComponent />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/register" element={<TestLog />} />
+      <Route path="/signin" element={<TestSignIn />} />
+    </Routes>
+    {/* <TestComponent />
     <br />
     <br />
     <br />
@@ -16,7 +20,7 @@ const App = (): ReactElement => (
     <br />
     <br />
     <br />
-    <TestSignIn />
+    <TestSignIn /> */}
   </div>
 );
 
