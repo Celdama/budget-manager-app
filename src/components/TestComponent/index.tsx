@@ -28,7 +28,7 @@ const TestComponent = (): JSX.Element => {
     const { name, value } = e.target as HTMLInputElement;
     setFormTransaction((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: name === 'amount' ? +value : value,
     }));
   };
 

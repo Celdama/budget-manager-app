@@ -36,7 +36,6 @@ const createTransactionSlice = (
     }
   },
   addTransaction: async (transaction: Transaction) => {
-    console.log('from transaction', transaction);
     const { uid } = transaction;
     try {
       await setDoc(doc(db, 'transactions', uid), {
