@@ -10,6 +10,7 @@ export interface TransactionSlice {
   transactions: Transaction[];
   getTransactions: () => void;
   addTransaction: (transaction: Transaction) => void;
+  deleteTransaction: (transaction: Transaction) => void
 }
 
 const transactionsCollectionRef = collection(db, 'transactions');
@@ -64,7 +65,7 @@ const createTransactionSlice = (
         transactions: transactions.filter(
           (transaction) => transaction.uid !== uid,
         ),
-      }));
+      }), false, 'transactions.deleteTransaction');
     } catch (err) {
       console.log(err);
     }

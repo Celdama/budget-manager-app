@@ -11,6 +11,7 @@ import { Wrapper } from './testComponent.tw';
 const TestComponent = (): JSX.Element => {
   const addTransaction = useStore((state) => state.addTransaction);
   const getTransactions = useStore((state) => state.getTransactions);
+  const deleteTransaction = useStore((state) => state.deleteTransaction);
   const transactions = useStore((state) => state.transactions);
   const [formTransaction, setFormTransaction] = useState({
     name: '',
@@ -53,7 +54,18 @@ const TestComponent = (): JSX.Element => {
   };
 
   const transactionsList = transactions.map((transaction: Transaction) => (
-    <p key={transaction.uid}>{transaction.name}</p>
+    <p key={transaction.uid}>
+      {transaction.name}
+      {' '}
+      -
+      {' '}
+      {transaction.amount}
+      ------
+      {' '}
+      <button type="button" onClick={() => deleteTransaction(transaction)}>
+        x
+      </button>
+    </p>
   ));
 
   return (
