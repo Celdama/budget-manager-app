@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable prefer-promise-reject-errors */
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';

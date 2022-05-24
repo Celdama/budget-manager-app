@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { User } from '../model/User';
-import { addUserToFirebase } from './firebase/callFirebase';
-import { NamedSetState } from './middlewares/middleware';
-import { MyState } from './useStore';
+import { User } from '../../model/User';
+import { addUserToFirebase } from '../firebase/callFirebase';
+import { NamedSetState } from '../middlewares/middleware';
+import { MyState } from '../useStore';
 
 export interface UserSlice {
   users: User[];

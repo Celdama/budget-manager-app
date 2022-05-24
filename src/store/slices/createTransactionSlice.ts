@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Transaction } from '../model/Transaction';
-import { NamedSetState } from './middlewares/middleware';
-import { MyState } from './useStore';
+import { Transaction } from '../../model/Transaction';
+import { addTransactionToFirebase } from '../firebase/callFirebase';
+import { NamedSetState } from '../middlewares/middleware';
+import { MyState } from '../useStore';
 
 export interface TransactionSlice {
   transactions: Transaction[];
@@ -14,6 +15,7 @@ const createTransactionSlice = (
 ) => ({
   transactions: [],
   addTransaction: (transaction: Transaction) => {
+    addTransactionToFirebase(transaction);
     set(
       ({ transactions }) => ({
         transactions: [...transactions, transaction],

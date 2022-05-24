@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import createAuthUserSlice, { AuthUserSlice } from './createAuthSlice';
-import createTransactionSlice, { TransactionSlice } from './createTransactionSlice';
-import createUserSlice, { UserSlice } from './createUserSlice';
+import createAuthUserSlice, { AuthUserSlice } from './slices/createAuthSlice';
+import createTransactionSlice, { TransactionSlice } from './slices/createTransactionSlice';
+import createUserSlice, { UserSlice } from './slices/createUserSlice';
 
 export type MyState = UserSlice & TransactionSlice & AuthUserSlice;
 
