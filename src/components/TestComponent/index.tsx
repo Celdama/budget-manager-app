@@ -2,7 +2,7 @@
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
 import { nanoid } from 'nanoid';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
@@ -10,12 +10,17 @@ import { Wrapper } from './testComponent.tw';
 
 const TestComponent = (): JSX.Element => {
   const addTransaction = useStore((state) => state.addTransaction);
+  const getTransactions = useStore((state) => state.getTransactions);
   const transactions = useStore((state) => state.transactions);
   const [formTransaction, setFormTransaction] = useState({
     name: '',
     amount: 0,
     category: '',
   });
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,

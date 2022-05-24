@@ -2,7 +2,7 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable prefer-promise-reject-errors */
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 import { auth, db } from '../../config/firebaseConfig';
 import { AuthUser } from '../../model/AuthUser';
@@ -18,6 +18,17 @@ export const addUserToFirebase = async (user: User): Promise<User> => {
     return user;
   } catch (err) {
     return Promise.reject(new Error('add user to firebase failed'));
+  }
+};
+
+export const getTransactionsFromFirebase = async (): Promise<object> => {
+  const transactionsCollectionRef = collection(db, 'transactions');
+  try {
+    const data = await getDocs(transactionsCollectionRef);
+    const res = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    return res;
+  } catch (err) {
+    return Promise.reject(new Error('get transactions from firebase failed'));
   }
 };
 
