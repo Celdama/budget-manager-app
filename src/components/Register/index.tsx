@@ -29,6 +29,7 @@ export const Register = (): ReactElement => {
       };
 
       await registerUser(newUser, password);
+      // METTRE UNE CONDITION ICI, ENREGISTRER L4USER DANS LA DB QUE SI IL EST AUTH
       addUser({
         ...newUser,
         amount: 0,
@@ -54,28 +55,24 @@ export const Register = (): ReactElement => {
       <h1>Register here</h1>
       <form>
         <Input
-          type="text"
           name="email"
           value={email}
           placeholder="email"
           onChange={handleChange}
         />
         <Input
-          type="password"
           name="password"
           value={password}
           placeholder="password"
           onChange={handleChange}
         />
         <Input
-          type="text"
           name="username"
           value={username}
           placeholder="username"
           onChange={handleChange}
         />
         <Input
-          type="text"
           name="avatar"
           value={avatar}
           placeholder="avatar URL"

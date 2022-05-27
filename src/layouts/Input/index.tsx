@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 
 interface InputsProps {
-  type: string;
+  // eslint-disable-next-line react/require-default-props
+  type?: string;
   name: string;
   value: string;
   placeholder: string;
@@ -9,7 +10,7 @@ interface InputsProps {
 }
 
 export const Input = ({
-  type,
+  type = 'text',
   name,
   value,
   placeholder,
