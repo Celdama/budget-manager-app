@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { Register } from '../components/Register';
+import Signin from '../components/Signin';
 import TestComponent from '../components/TestComponent';
-import TestSignIn from '../components/TestSignIn';
 import { Home } from '../pages/Home';
 
 export const Router = (): JSX.Element => (
@@ -10,6 +10,6 @@ export const Router = (): JSX.Element => (
     <Route path="/" element={<Home />} />
     <Route path="/transaction" element={<TestComponent />} />
     <Route path="/register" element={<Register />} />
-    <Route path="/signin" element={<TestSignIn />} />
+    <Route path="/signin" element={<Signin />} />
   </Routes>
 );

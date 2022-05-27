@@ -2,7 +2,7 @@ import { MouseEvent, ReactElement, useState } from 'react';
 
 import useStore from '../../store/useStore';
 
-const SignIn = (): ReactElement => {
+const Signin = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signInUser } = useStore();
@@ -44,4 +44,4 @@ const SignIn = (): ReactElement => {
   );
 };
 
-export default TestSignIn;
+export default Signin;
