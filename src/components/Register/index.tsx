@@ -3,7 +3,7 @@ import { MouseEvent, ReactElement, useState } from 'react';
 
 import useStore from '../../store/useStore';
 
-export const TestLog = (): ReactElement => {
+export const Register = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');

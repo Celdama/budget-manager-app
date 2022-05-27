@@ -13,6 +13,7 @@ export interface UserSlice {
 
 const createUserSlice = (
   set: NamedSetState<MyState>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   get: NamedSetState<MyState>,
 ) => ({
   users: [],
