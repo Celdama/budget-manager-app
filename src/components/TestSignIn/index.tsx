@@ -2,7 +2,7 @@ import { MouseEvent, ReactElement, useState } from 'react';
 
 import useStore from '../../store/useStore';
 
-const TestSignIn = (): ReactElement => {
+const SignIn = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signInUser } = useStore();
