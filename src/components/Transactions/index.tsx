@@ -8,7 +8,7 @@ import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
 import { Wrapper } from './testComponent.tw';
 
-const TestComponent = (): JSX.Element => {
+const Transactions = (): JSX.Element => {
   const addTransaction = useStore((state) => state.addTransaction);
   const getTransactions = useStore((state) => state.getTransactions);
   const deleteTransaction = useStore((state) => state.deleteTransaction);
@@ -105,4 +105,4 @@ const TestComponent = (): JSX.Element => {
   );
 };
 
-export default TestComponent;
+export default Transactions;
