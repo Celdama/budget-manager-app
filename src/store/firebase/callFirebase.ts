@@ -1,12 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable prefer-promise-reject-errors */
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
-import { auth, db } from '../../config/firebaseConfig';
-import { AuthUser } from '../../model/AuthUser';
-import { Transaction } from '../../model/Transaction';
+import { db } from '../../config/firebaseConfig';
 import { User } from '../../model/User';
 
 export const addUserToFirebase = async (user: User): Promise<User> => {
@@ -18,74 +15,5 @@ export const addUserToFirebase = async (user: User): Promise<User> => {
     return user;
   } catch (err) {
     return Promise.reject(new Error('add user to firebase failed'));
-  }
-};
-
-export const getTransactionsFromFirebase = async (): Promise<object> => {
-  const transactionsCollectionRef = collection(db, 'transactions');
-  try {
-    const data = await getDocs(transactionsCollectionRef);
-    const res = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    return res;
-  } catch (err) {
-    return Promise.reject(new Error('get transactions from firebase failed'));
-  }
-};
-
-export const addTransactionToFirebase = async (
-  transaction: Transaction,
-): Promise<Transaction> => {
-  const { uid } = transaction;
-  try {
-    await setDoc(doc(db, 'transactions', uid), {
-      ...transaction,
-    });
-    return transaction;
-  } catch (err) {
-    return Promise.reject(new Error('add transaction to firebase failed'));
-  }
-};
-
-export const registerUserToFirebase = async (
-  user: AuthUser,
-  password: string,
-): Promise<object> => {
-  const { email, displayName, photoURL } = user;
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-
-    await updateProfile(userCredential.user, {
-      displayName,
-      photoURL,
-    });
-    return userCredential.user;
-  } catch (err) {
-    return Promise.reject(new Error('register user to firebase failed'));
-  }
-};
-
-export const signInUserToFirebase = async (
-  signInEmail: string,
-  signInPassword: string,
-): Promise<object> => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      signInEmail,
-      signInPassword,
-    );
-    const { email, uid, displayName, photoURL } = userCredential.user;
-    return {
-      email,
-      uid,
-      displayName,
-      photoURL,
-    };
-  } catch (err) {
-    return Promise.reject(new Error('sign in user to firebase failed'));
   }
 };

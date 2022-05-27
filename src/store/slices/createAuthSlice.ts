@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+
+import { auth } from '../../config/firebaseConfig';
 import { AuthUser } from '../../model/AuthUser';
-import { registerUserToFirebase, signInUserToFirebase } from '../firebase/callFirebase';
 import { NamedSetState } from '../middlewares/middleware';
 import { MyState } from '../useStore';
 
@@ -17,12 +19,34 @@ const createAuthUserSlice = (
 ) => ({
   authUser: {},
   registerUser: async (user: AuthUser, password: string) => {
-    await registerUserToFirebase(user, password);
-    set({ authUser: user }, false, 'authUser.registerUser');
+    const { email, displayName, photoURL } = user;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      await updateProfile(userCredential.user, {
+        displayName,
+        photoURL,
+      });
+      set({ authUser: user }, false, 'authUser.registerUser');
+    } catch (err) {
+      console.log(err);
+    }
   },
   signInUser: async (email: string, password: string) => {
-    const signInUser = await signInUserToFirebase(email, password);
-    set({ authUser: signInUser }, false, 'authUser.signInUser');
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const { uid, displayName, photoURL } = userCredential.user;
+      set({ authUser: { email, uid, displayName, photoURL } }, false, 'authUser.signInUser');
+    } catch (err) {
+      console.log(err);
+    }
   },
 });
 
