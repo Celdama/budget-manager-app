@@ -8,7 +8,9 @@ export const TestLog = (): ReactElement => {
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
   const [avatar, setAvatar] = useState('');
-  const { registerUser } = useStore();
+  // const { registerUser } = useStore();
+  const registerUser = useStore((state) => state.registerUser);
+  const addUser = useStore((state) => state.addUser);
 
   const handleRegisterUser = async (
     e: MouseEvent<HTMLButtonElement>,
@@ -23,6 +25,13 @@ export const TestLog = (): ReactElement => {
       };
 
       await registerUser(newUser, password);
+      addUser({
+        ...newUser,
+        amount: 0,
+        investAmount: 0,
+        totalAmount: 0,
+        transactionId: [],
+      });
       // ADD NEW USER FROM HERE IN FIRESTORE DB
       setEmail('');
       setPassword('');
