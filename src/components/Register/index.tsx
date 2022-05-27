@@ -4,11 +4,12 @@ import { MouseEvent, ReactElement, useState } from 'react';
 import useStore from '../../store/useStore';
 
 export const Register = (): ReactElement => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userName, setUserName] = useState('');
-  const [avatar, setAvatar] = useState('');
-  // const { registerUser } = useStore();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    avatar: '',
+  });
   const registerUser = useStore((state) => state.registerUser);
   const addUser = useStore((state) => state.addUser);
 
@@ -16,15 +17,15 @@ export const Register = (): ReactElement => {
     e: MouseEvent<HTMLButtonElement>,
   ): Promise<void> => {
     e.preventDefault();
-    if (email.length && password.length) {
+    if (formData.email.length && formData.password.length) {
       const newUser = {
-        email,
+        email: formData.email,
         uid: nanoid(),
-        displayName: userName,
-        photoURL: avatar,
+        displayName: formData.username,
+        photoURL: formData.avatar,
       };
 
-      await registerUser(newUser, password);
+      await registerUser(newUser, formData.password);
       addUser({
         ...newUser,
         amount: 0,
@@ -32,12 +33,17 @@ export const Register = (): ReactElement => {
         totalAmount: 0,
         transactionId: [],
       });
-      // ADD NEW USER FROM HERE IN FIRESTORE DB
-      setEmail('');
-      setPassword('');
-      setUserName('');
-      setAvatar('');
+      // redirect to profile page to let user add transactions and account
     }
+  };
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target as HTMLInputElement;
+
+    setFormData(((prevState) => ({
+      ...prevState,
+      [name]: value,
+    })));
   };
 
   return (
@@ -48,33 +54,37 @@ export const Register = (): ReactElement => {
           className="outline m-4"
           type="text"
           name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          placeholder="email"
+          onChange={handleChange}
         />
         <br />
         <input
           className="outline m-4"
           type="password"
           name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          placeholder="password"
+          onChange={handleChange}
         />
         <br />
         <br />
         <input
           className="outline m-4"
           type="text"
-          name="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          name="username"
+          value={formData.username}
+          placeholder="username"
+          onChange={handleChange}
         />
         <br />
         <input
           className="outline m-4"
           type="text"
           name="avatar"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
+          placeholder="avatar URL"
+          value={formData.avatar}
+          onChange={handleChange}
         />
         <br />
         <button type="submit" onClick={(e) => handleRegisterUser(e)}>
