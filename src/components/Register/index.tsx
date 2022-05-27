@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { MouseEvent, ReactElement, useState } from 'react';
 
+import { Input } from '../../layouts/Input';
 import useStore from '../../store/useStore';
 
 export const Register = (): ReactElement => {
@@ -10,22 +11,24 @@ export const Register = (): ReactElement => {
     password: '',
     avatar: '',
   });
-  const registerUser = useStore((state) => state.registerUser);
-  const addUser = useStore((state) => state.addUser);
+  const registerUser = useStore(({ registerUser }) => registerUser);
+  const addUser = useStore(({ addUser }) => addUser);
+
+  const { username, email, password, avatar } = formData;
 
   const handleRegisterUser = async (
     e: MouseEvent<HTMLButtonElement>,
   ): Promise<void> => {
     e.preventDefault();
-    if (formData.email.length && formData.password.length) {
+    if (email.length && password.length) {
       const newUser = {
-        email: formData.email,
+        email,
         uid: nanoid(),
-        displayName: formData.username,
-        photoURL: formData.avatar,
+        displayName: username,
+        photoURL: avatar,
       };
 
-      await registerUser(newUser, formData.password);
+      await registerUser(newUser, password);
       addUser({
         ...newUser,
         amount: 0,
@@ -48,46 +51,37 @@ export const Register = (): ReactElement => {
 
   return (
     <>
-      <div>test log</div>
+      <h1>Register here</h1>
       <form>
-        <input
-          className="outline m-4"
+        <Input
           type="text"
           name="email"
-          value={formData.email}
+          value={email}
           placeholder="email"
           onChange={handleChange}
         />
-        <br />
-        <input
-          className="outline m-4"
+        <Input
           type="password"
           name="password"
-          value={formData.password}
+          value={password}
           placeholder="password"
           onChange={handleChange}
         />
-        <br />
-        <br />
-        <input
-          className="outline m-4"
+        <Input
           type="text"
           name="username"
-          value={formData.username}
+          value={username}
           placeholder="username"
           onChange={handleChange}
         />
-        <br />
-        <input
-          className="outline m-4"
+        <Input
           type="text"
           name="avatar"
+          value={avatar}
           placeholder="avatar URL"
-          value={formData.avatar}
           onChange={handleChange}
         />
-        <br />
-        <button type="submit" onClick={(e) => handleRegisterUser(e)}>
+        <button type="submit" onClick={handleRegisterUser}>
           Register
         </button>
       </form>
