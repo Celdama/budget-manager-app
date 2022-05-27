@@ -1,8 +1,14 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from 'firebase/auth';
 
-import { auth } from '../../config/firebaseConfig';
+import { auth, provider } from '../../config/firebaseConfig';
 import { AuthUser } from '../../model/AuthUser';
 import { NamedSetState } from '../middlewares/middleware';
 import { MyState } from '../useStore';
@@ -10,6 +16,7 @@ import { MyState } from '../useStore';
 export interface AuthUserSlice {
   authUser: object;
   registerUser: (user: AuthUser, password: string) => void;
+  registerUserWithGoogle: () => void;
   signInUser: (email: string, password: string) => void
 }
 
@@ -35,6 +42,22 @@ const createAuthUserSlice = (
     } catch (err) {
       console.log(err);
     }
+  },
+  registerUserWithGoogle: () => {
+    // const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const { user } = result;
+        console.log(user);
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const { email } = error.customData;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorMessage);
+      });
   },
   signInUser: async (email: string, password: string) => {
     try {
