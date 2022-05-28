@@ -39,6 +39,7 @@ const createAuthUserSlice = (
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
       });
   },
   registerUserWithGoogle: async () => {
@@ -57,17 +58,15 @@ const createAuthUserSlice = (
       });
   },
   signInUser: async (email: string, password: string) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-      const { uid, displayName, photoURL } = userCredential.user;
-      set({ authUser: { email, uid, displayName, photoURL } }, false, 'authUser.signInUser');
-    } catch (err) {
-      console.log(err);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const { uid, displayName, photoURL } = userCredential.user;
+        set({ authUser: { email, uid, displayName, photoURL } }, false, 'authUser.signInUser');
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   },
 });
 
