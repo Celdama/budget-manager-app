@@ -25,7 +25,7 @@ const createAuthUserSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   authUser: {},
-  registerUser: async (user: AuthUser, password: string) => {
+  registerUser: (user: AuthUser, password: string) => {
     const { email, displayName, photoURL } = user;
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -42,7 +42,7 @@ const createAuthUserSlice = (
         console.log(errorMessage);
       });
   },
-  registerUserWithGoogle: async () => {
+  registerUserWithGoogle: () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -57,7 +57,7 @@ const createAuthUserSlice = (
         console.log(errorMessage);
       });
   },
-  signInUser: async (email: string, password: string) => {
+  signInUser: (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const { uid, displayName, photoURL } = userCredential.user;
