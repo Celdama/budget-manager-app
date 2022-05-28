@@ -6,6 +6,7 @@ import Signin from '../components/Signin';
 import Transactions from '../components/Transactions';
 import { Home } from '../pages/Home';
 
+// import { RegisterGoogle } from '../components/RegisterGoogle';
 export const Router = (): JSX.Element => (
   <Routes>
     <Route path="/" element={<Home />} />

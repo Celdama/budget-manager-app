@@ -22,29 +22,26 @@ export interface AuthUserSlice {
 
 const createAuthUserSlice = (
   set: NamedSetState<MyState>,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   get: NamedSetState<MyState>,
 ) => ({
   authUser: {},
   registerUser: async (user: AuthUser, password: string) => {
     const { email, displayName, photoURL } = user;
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-      await updateProfile(userCredential.user, {
-        displayName,
-        photoURL,
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        updateProfile(user, {
+          displayName,
+          photoURL,
+        });
+        set({ authUser: user }, false, 'authUser.registerUser');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
-      set({ authUser: user }, false, 'authUser.registerUser');
-    } catch (err) {
-      console.log(err);
-    }
   },
-  registerUserWithGoogle: () => {
-    // const auth = getAuth();
+  registerUserWithGoogle: async () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
