@@ -1,10 +1,9 @@
 export interface User {
   uid: string,
-  photoURL: string,
-  displayName: string,
-  email: string,
+  photoURL: string | null,
+  displayName: string | null,
+  email: string | null,
   amount: number,
   investAmount: number,
   totalAmount: number,
-  transactionId: string[]
 }

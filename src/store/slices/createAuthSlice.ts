@@ -1,54 +1,41 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-} from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 
 import { auth, provider } from '../../config/firebaseConfig';
 import { AuthUser } from '../../model/AuthUser';
 import { NamedSetState } from '../middlewares/middleware';
-import { MyState } from '../useStore';
+import useStore, { MyState } from '../useStore';
 
 export interface AuthUserSlice {
-  authUser: object;
-  registerUser: (user: AuthUser, password: string) => void;
+  isAuthUser: boolean;
+  authUser: AuthUser;
   registerUserWithGoogle: () => void;
-  signInUser: (email: string, password: string) => void
+  getAuthUser: () => any
 }
 
 const createAuthUserSlice = (
   set: NamedSetState<MyState>,
   get: NamedSetState<MyState>,
 ) => ({
-  authUser: {},
-  registerUser: (user: AuthUser, password: string) => {
-    const { email, displayName, photoURL } = user;
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        updateProfile(user, {
-          displayName,
-          photoURL,
-        });
-        set({ authUser: user }, false, 'authUser.registerUser');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
+  isAuthUser: false,
+  authUser: {
+    uid: '',
+    displayName: '',
+    email: '',
+    photoURL: '',
   },
+
   registerUserWithGoogle: () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const { user } = result;
-        console.log(user);
+        // const name = user.displayName;
+        const { displayName, uid, email, photoURL } = user;
+        set({ authUser: { displayName, uid, email, photoURL }, isAuthUser: true }, false, 'authUser.registerUserWithGoogle');
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -57,16 +44,15 @@ const createAuthUserSlice = (
         console.log(errorMessage);
       });
   },
-  signInUser: (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const { uid, displayName, photoURL } = userCredential.user;
-        set({ authUser: { email, uid, displayName, photoURL } }, false, 'authUser.signInUser');
-      }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
+  getAuthUser: async () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { email, displayName, uid, photoURL } = user;
+        set({ authUser: { email, displayName, uid, photoURL } }, false, 'authUser.getAuthUser');
+      } else {
+        console.log('not login');
+      }
+    });
   },
 });
 

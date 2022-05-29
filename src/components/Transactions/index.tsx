@@ -6,12 +6,12 @@ import { MouseEvent, useEffect, useState } from 'react';
 
 import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
-import { Wrapper } from './testComponent.tw';
 
 const Transactions = (): JSX.Element => {
   const addTransaction = useStore((state) => state.addTransaction);
   const getTransactions = useStore((state) => state.getTransactions);
   const deleteTransaction = useStore((state) => state.deleteTransaction);
+  const authUser = useStore((state) => state.authUser);
   const transactions = useStore((state) => state.transactions);
   const [formTransaction, setFormTransaction] = useState({
     name: '',
@@ -19,8 +19,13 @@ const Transactions = (): JSX.Element => {
     category: '',
   });
 
+  const getAuthUser = useStore((state) => state.getAuthUser);
+
   useEffect(() => {
-    getTransactions();
+    getAuthUser();
+    // getTransactions();
+    // const auth = getAuth();
+    // console.log(auth.currentUser);
   }, []);
 
   const handleChange = (
@@ -68,9 +73,19 @@ const Transactions = (): JSX.Element => {
     </p>
   ));
 
+  console.log(authUser);
+
   return (
-    <Wrapper>
+    <div>
       create transaction
+      <h1>
+        {/* {
+          authUser.displayName && <div>test</div>
+        } */}
+        Hello
+        {' '}
+        {/* {authUser.displayName} */}
+      </h1>
       <form>
         <input
           type="text"
@@ -101,7 +116,7 @@ const Transactions = (): JSX.Element => {
       </form>
       <h2>transactions List</h2>
       {transactionsList}
-    </Wrapper>
+    </div>
   );
 };
 
