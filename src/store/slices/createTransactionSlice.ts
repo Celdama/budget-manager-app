@@ -40,26 +40,24 @@ const createTransactionSlice = (
       console.log(err);
     }
   },
-  addTransaction: async (transaction: Transaction) => {
+  addTransaction: (transaction: Transaction) => {
     const { uid, userId } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
-    try {
-      await setDoc(doc(db, 'transactions', uid), {
-        ...transaction,
-      });
-      await updateDoc(transactionsDoc, {
+    setDoc(doc(db, 'transactions', uid), {
+      ...transaction,
+    }).then(() => {
+      updateDoc(transactionsDoc, {
         transactionsId: arrayUnion(uid),
       });
+    }).then(() => {
       set(
         ({ transactions }) => ({
           transactions: [...transactions, transaction],
         }),
-        false,
-        'transactions.addTransaction',
       );
-    } catch (err) {
-      console.log(err);
-    }
+    }).catch((error) => {
+      console.log(error);
+    });
   },
   deleteTransaction: async (transaction: Transaction) => {
     const { uid, userId } = transaction;
