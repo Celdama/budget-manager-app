@@ -19,14 +19,11 @@ const Transactions = (): JSX.Element => {
     category: '',
   });
 
-  const getAuthUser = useStore((state) => state.getAuthUser);
-
   useEffect(() => {
-    getAuthUser();
-    // getTransactions();
-    // const auth = getAuth();
-    // console.log(auth.currentUser);
-  }, []);
+    if (authUser.email) {
+      console.log(authUser.email);
+    }
+  }, [authUser]);
 
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
@@ -44,7 +41,7 @@ const Transactions = (): JSX.Element => {
       const newTransaction = {
         ...formTransaction,
         uid: nanoid(),
-        userId: 'OEcO44NJyZPqSaH52IpL',
+        userId: authUser.uid,
         date: new Date().toString(),
       };
       // LE TRUC C4EST QUE MAINTENANT, JE VAIS DEVOIR TROUVER L'ID DE L'USER EN QUESTION
@@ -73,19 +70,12 @@ const Transactions = (): JSX.Element => {
     </p>
   ));
 
-  console.log(authUser);
-
   return (
     <div>
       create transaction
-      <h1>
-        {/* {
-          authUser.displayName && <div>test</div>
-        } */}
-        Hello
-        {' '}
-        {/* {authUser.displayName} */}
-      </h1>
+      <h1>{`Hello ${authUser.displayName}`}</h1>
+      <img src={`${authUser.photoURL}`} alt="avatar" />
+      <p>{`${authUser.email}`}</p>
       <form>
         <input
           type="text"

@@ -12,7 +12,7 @@ export interface AuthUserSlice {
   isAuthUser: boolean;
   authUser: AuthUser;
   registerUserWithGoogle: () => void;
-  getAuthUser: () => any
+  monitorAuthState: () => void
 }
 
 const createAuthUserSlice = (
@@ -44,7 +44,7 @@ const createAuthUserSlice = (
         console.log(errorMessage);
       });
   },
-  getAuthUser: async () => {
+  monitorAuthState: async () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { email, displayName, uid, photoURL } = user;

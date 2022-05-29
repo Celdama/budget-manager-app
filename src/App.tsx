@@ -4,12 +4,12 @@ import { Router } from './router';
 import useStore from './store/useStore';
 
 const App = (): JSX.Element => {
-  const getAuthUser = useStore(
-    ({ getAuthUser }) => getAuthUser,
+  const monitorAuthState = useStore(
+    ({ monitorAuthState }) => monitorAuthState,
   );
 
   useEffect(() => {
-    getAuthUser();
+    monitorAuthState();
   }, []);
 
   return (
