@@ -28,6 +28,7 @@ export const RegisterGoogle = (): ReactElement => {
         amount: 0,
         investAmount: 0,
         totalAmount: 0,
+        transactionsId: [],
       };
       console.log(newUser);
       addUser(newUser);
