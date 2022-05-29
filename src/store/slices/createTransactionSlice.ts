@@ -13,34 +13,29 @@ export interface TransactionSlice {
   deleteTransaction: (transaction: Transaction) => void
 }
 
-const transactionsCollectionRef = collection(db, 'transactions');
-
 const createTransactionSlice = (
   set: NamedSetState<MyState>,
   get: NamedSetState<MyState>,
 ) => ({
   transactions: [],
-  getTransactions: async (authUserId: string) => {
-    try {
-      const docs = await getDocs(transactionsCollectionRef);
-      const arr: Transaction[] = [];
+  getTransactions: (authUserId: string) => {
+    const transactionsCollectionRef = collection(db, 'transactions');
+    const arr: Transaction[] = [];
+    getDocs(transactionsCollectionRef).then((docs) => {
       docs.forEach((doc) => {
         const { name, amount, uid, date, category, userId } = doc.data();
         if (userId === authUserId) {
           arr.push({ name, amount, uid, date, category, userId });
         }
       });
-      set(
-        (state) => ({
-          ...state,
-          transactions: [...arr],
-        }),
-        false,
-        'transactions.getTransactions',
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    }).then(() => {
+      set((state) => ({
+        ...state,
+        transactions: [...arr],
+      }), false, 'transactions.getTransactions');
+    }).catch((error) => {
+      console.log(error);
+    });
   },
   addTransaction: (transaction: Transaction) => {
     const { uid, userId } = transaction;
