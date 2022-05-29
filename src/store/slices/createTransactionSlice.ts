@@ -59,22 +59,23 @@ const createTransactionSlice = (
       console.log(error);
     });
   },
-  deleteTransaction: async (transaction: Transaction) => {
+  deleteTransaction: (transaction: Transaction) => {
     const { uid, userId } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
-    try {
-      await deleteDoc(doc(db, 'transactions', uid));
-      await updateDoc(transactionsDoc, {
-        transactionsId: arrayRemove(uid),
+    deleteDoc(doc(db, 'transactions', uid))
+      .then(() => {
+        updateDoc(transactionsDoc, {
+          transactionsId: arrayRemove(uid),
+        });
+      }).then(() => {
+        set(({ transactions }) => ({
+          transactions: transactions.filter(
+            (transaction) => transaction.uid !== uid,
+          ),
+        }), false, 'transactions.deleteTransaction');
+      }).catch((error) => {
+        console.log(error);
       });
-      set(({ transactions }) => ({
-        transactions: transactions.filter(
-          (transaction) => transaction.uid !== uid,
-        ),
-      }), false, 'transactions.deleteTransaction');
-    } catch (err) {
-      console.log(err);
-    }
   },
 });
 
