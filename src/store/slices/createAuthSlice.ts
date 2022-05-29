@@ -35,7 +35,10 @@ const createAuthUserSlice = (
         const { user } = result;
         // const name = user.displayName;
         const { displayName, uid, email, photoURL } = user;
-        set({ authUser: { displayName, uid, email, photoURL }, isAuthUser: true }, false, 'authUser.registerUserWithGoogle');
+        set({
+          authUser: { displayName, uid, email, photoURL },
+          isAuthUser: true,
+        }, false, 'authUser.registerUserWithGoogle');
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
