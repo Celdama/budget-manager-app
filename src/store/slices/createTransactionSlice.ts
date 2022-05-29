@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '../../config/firebaseConfig';
 import { Transaction } from '../../model/Transaction';
@@ -41,10 +41,14 @@ const createTransactionSlice = (
     }
   },
   addTransaction: async (transaction: Transaction) => {
-    const { uid } = transaction;
+    const { uid, userId } = transaction;
+    const transactionsDoc = doc(db, 'users', userId);
     try {
       await setDoc(doc(db, 'transactions', uid), {
         ...transaction,
+      });
+      await updateDoc(transactionsDoc, {
+        transactionsId: arrayUnion(uid),
       });
       set(
         ({ transactions }) => ({
@@ -58,9 +62,13 @@ const createTransactionSlice = (
     }
   },
   deleteTransaction: async (transaction: Transaction) => {
-    const { uid } = transaction;
+    const { uid, userId } = transaction;
+    const transactionsDoc = doc(db, 'users', userId);
     try {
       await deleteDoc(doc(db, 'transactions', uid));
+      await updateDoc(transactionsDoc, {
+        transactionsId: arrayRemove(uid),
+      });
       set(({ transactions }) => ({
         transactions: transactions.filter(
           (transaction) => transaction.uid !== uid,
