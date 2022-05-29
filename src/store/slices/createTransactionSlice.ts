@@ -8,7 +8,7 @@ import { MyState } from '../useStore';
 
 export interface TransactionSlice {
   transactions: Transaction[];
-  getTransactions: () => void;
+  getTransactions: (authUserId: string) => void;
   addTransaction: (transaction: Transaction) => void;
   deleteTransaction: (transaction: Transaction) => void
 }
@@ -20,13 +20,15 @@ const createTransactionSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   transactions: [],
-  getTransactions: async () => {
+  getTransactions: async (authUserId: string) => {
     try {
       const docs = await getDocs(transactionsCollectionRef);
       const arr: Transaction[] = [];
       docs.forEach((doc) => {
         const { name, amount, uid, date, category, userId } = doc.data();
-        arr.push({ name, amount, uid, date, category, userId });
+        if (userId === authUserId) {
+          arr.push({ name, amount, uid, date, category, userId });
+        }
       });
       set(
         (state) => ({

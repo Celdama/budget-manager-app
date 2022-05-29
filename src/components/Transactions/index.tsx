@@ -22,6 +22,7 @@ const Transactions = (): JSX.Element => {
   useEffect(() => {
     if (authUser.email) {
       console.log(authUser.email);
+      getTransactions(authUser.uid);
     }
   }, [authUser]);
 
@@ -44,8 +45,6 @@ const Transactions = (): JSX.Element => {
         userId: authUser.uid,
         date: new Date().toString(),
       };
-      // LE TRUC C4EST QUE MAINTENANT, JE VAIS DEVOIR TROUVER L'ID DE L'USER EN QUESTION
-      // POUR LUI AJOUTER L'ID DE CETTE TRANSACTION DANS SON TABLEAU DE TRANSACTIONS
       addTransaction(newTransaction);
       setFormTransaction({
         name: '',
