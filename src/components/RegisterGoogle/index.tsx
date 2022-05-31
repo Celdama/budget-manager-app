@@ -7,7 +7,7 @@ import { RegisterGoogleProps } from './Types/registerGoogleProps';
 const RegisterGoogle = ({
   isAuthUser,
   authUser,
-  addUser,
+  addUserInFirestore,
   registerUserWithGoogle,
 }: RegisterGoogleProps): JSX.Element => {
   useEffect(() => {
@@ -19,7 +19,7 @@ const RegisterGoogle = ({
         totalAmount: 0,
         transactionsId: [],
       };
-      addUser(newUser);
+      addUserInFirestore(newUser);
     }
   }, [isAuthUser]);
 
@@ -40,7 +40,7 @@ const RegisterGoogle = ({
 export const RegisterGoogleStore = (): ReactElement => {
   const isAuthUser = useStore((state) => state.isAuthUser);
   const authUser = useStore((state) => state.authUser);
-  const addUser = useStore((state) => state.addUser);
+  const addUserInFirestore = useStore((state) => state.addUserInFirestore);
   const registerUserWithGoogle = useStore(
     (state) => state.registerUserWithGoogle,
   );
@@ -49,7 +49,7 @@ export const RegisterGoogleStore = (): ReactElement => {
     <RegisterGoogle
       isAuthUser={isAuthUser}
       authUser={authUser}
-      addUser={addUser}
+      addUserInFirestore={addUserInFirestore}
       registerUserWithGoogle={registerUserWithGoogle}
     />
   );

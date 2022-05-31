@@ -8,7 +8,7 @@ import { MyState } from '../useStore';
 
 export interface UserSlice {
   users: User[];
-  addUser: (user: User) => void;
+  addUserInFirestore: (user: User) => void;
 }
 
 const createUserSlice = (
@@ -17,7 +17,7 @@ const createUserSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   users: [],
-  addUser: async (user: User) => {
+  addUserInFirestore: async (user: User) => {
     const { uid } = user;
     try {
       await setDoc(doc(db, 'users', uid), {
