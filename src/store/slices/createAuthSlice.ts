@@ -20,12 +20,7 @@ const createAuthUserSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   isAuthUser: false,
-  authUser: {
-    uid: '',
-    displayName: '',
-    email: '',
-    photoURL: '',
-  },
+  authUser: <AuthUser>{},
 
   registerUserWithGoogle: () => {
     signInWithPopup(auth, provider)
