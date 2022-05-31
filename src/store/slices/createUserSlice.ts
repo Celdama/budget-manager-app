@@ -26,7 +26,11 @@ const createUserSlice = (
       await setDoc(doc(db, 'users', uid), {
         ...user,
       });
-      set(({ users }) => ({ users: [...users, user] }), false, 'users.addUser');
+      set(
+        ({ users }) => ({ users: [...users, user] }),
+        false,
+        'userSlice.addUser',
+      );
     } catch (err) {
       console.log(err);
     }
