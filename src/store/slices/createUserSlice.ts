@@ -39,7 +39,6 @@ const createUserSlice = (
     const docRef = doc(db, 'users', userId);
     try {
       const docSnap = await getDoc(docRef);
-      console.log('document data', docSnap.data());
       set(
         { currentUser: docSnap.data() as User },
         false,

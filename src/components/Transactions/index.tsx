@@ -15,6 +15,7 @@ const Transactions = ({
   setCurrentUser,
   authUser,
   transactions,
+  currentUser,
 }: TransactionsProps): JSX.Element => {
   const [formTransaction, setFormTransaction] = useState({
     name: '',
