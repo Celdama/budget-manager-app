@@ -22,7 +22,6 @@ export const RegisterGoogle = (): ReactElement => {
 
   useEffect(() => {
     if (isAuthUser) {
-      console.log('user connected');
       const newUser = {
         ...authUser,
         amount: 0,
@@ -30,18 +29,9 @@ export const RegisterGoogle = (): ReactElement => {
         totalAmount: 0,
         transactionsId: [],
       };
-      console.log(newUser);
       addUser(newUser);
     }
   }, [isAuthUser]);
-
-  const test = async (): Promise<void> => {
-    try {
-      registerUserWithGoogle();
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <>
@@ -49,7 +39,7 @@ export const RegisterGoogle = (): ReactElement => {
       <button
         type="button"
         className="border p-4 bg-red-300 capitalize text-gray-700 border-gray-700 rounded-md  white"
-        onClick={test}
+        onClick={registerUserWithGoogle}
       >
         register with google
       </button>

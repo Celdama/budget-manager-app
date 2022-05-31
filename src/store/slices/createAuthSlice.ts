@@ -33,7 +33,6 @@ const createAuthUserSlice = (
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const { user } = result;
-        // const name = user.displayName;
         const { displayName, uid, email, photoURL } = user;
         set({
           authUser: { displayName, uid, email, photoURL },

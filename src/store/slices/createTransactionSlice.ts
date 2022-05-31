@@ -20,18 +20,18 @@ const createTransactionSlice = (
   transactions: [],
   getTransactions: (authUserId: string) => {
     const transactionsCollectionRef = collection(db, 'transactions');
-    const arr: Transaction[] = [];
+    const authUserTransactionsList: Transaction[] = [];
     getDocs(transactionsCollectionRef).then((docs) => {
       docs.forEach((doc) => {
         const { name, amount, uid, date, category, userId } = doc.data();
         if (userId === authUserId) {
-          arr.push({ name, amount, uid, date, category, userId });
+          authUserTransactionsList.push({ name, amount, uid, date, category, userId });
         }
       });
     }).then(() => {
       set((state) => ({
         ...state,
-        transactions: [...arr],
+        transactions: [...authUserTransactionsList],
       }), false, 'transactions.getTransactions');
     }).catch((error) => {
       console.log(error);
