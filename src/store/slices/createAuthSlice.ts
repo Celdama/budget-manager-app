@@ -6,7 +6,7 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebas
 import { auth, provider } from '../../config/firebaseConfig';
 import { AuthUser } from '../../model/AuthUser';
 import { NamedSetState } from '../middlewares/middleware';
-import useStore, { MyState } from '../useStore';
+import { MyState } from '../useStore';
 
 export interface AuthUserSlice {
   isAuthUser: boolean;
