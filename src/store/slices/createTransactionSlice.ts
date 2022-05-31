@@ -32,7 +32,7 @@ const createTransactionSlice = (
       set((state) => ({
         ...state,
         transactions: [...authUserTransactionsList],
-      }), false, 'transactions.getTransactions');
+      }), false, 'transactionSlice.getTransactions');
     }).catch((error) => {
       console.log(error);
     });
@@ -47,11 +47,9 @@ const createTransactionSlice = (
         transactionsId: arrayUnion(uid),
       });
     }).then(() => {
-      set(
-        ({ transactions }) => ({
-          transactions: [...transactions, transaction],
-        }),
-      );
+      set(({ transactions }) => ({
+        transactions: [...transactions, transaction],
+      }), false, 'transactionSlice.addTransaction');
     }).catch((error) => {
       console.log(error);
     });
@@ -69,7 +67,7 @@ const createTransactionSlice = (
           transactions: transactions.filter(
             (transaction) => transaction.uid !== uid,
           ),
-        }), false, 'transactions.deleteTransaction');
+        }), false, 'transactionSlice.deleteTransaction');
       }).catch((error) => {
         console.log(error);
       });
