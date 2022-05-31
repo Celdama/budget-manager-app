@@ -21,7 +21,8 @@ HOME PAGE
 
 ```
 
-# recuperer la somme totale de l'utilisateur connecté 
+# recuperer la somme totale de l'utilisateur connecté [x] 
+
 
 
 
