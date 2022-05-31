@@ -118,6 +118,7 @@ export const TransactionsStore = (): ReactElement => {
   const deleteTransaction = useStore((state) => state.deleteTransaction);
   const authUser = useStore((state) => state.authUser);
   const transactions = useStore((state) => state.transactions);
+  const setCurrentUser = useStore((state) => state.setCurrentUser);
   return (
     <Transactions
       addTransaction={addTransaction}
@@ -125,6 +126,7 @@ export const TransactionsStore = (): ReactElement => {
       deleteTransaction={deleteTransaction}
       authUser={authUser}
       transactions={transactions}
+      setCurrentUser={setCurrentUser}
     />
   );
 };
