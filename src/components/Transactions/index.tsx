@@ -6,13 +6,15 @@ import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 
 import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
+import { TransactionsProps } from './Types/transactionsProps';
 
-const Transactions = (): JSX.Element => {
-  const addTransaction = useStore((state) => state.addTransaction);
-  const getTransactions = useStore((state) => state.getTransactions);
-  const deleteTransaction = useStore((state) => state.deleteTransaction);
-  const authUser = useStore((state) => state.authUser);
-  const transactions = useStore((state) => state.transactions);
+const Transactions = ({
+  addTransaction,
+  getTransactions,
+  deleteTransaction,
+  authUser,
+  transactions,
+}: TransactionsProps): JSX.Element => {
   const [formTransaction, setFormTransaction] = useState({
     name: '',
     amount: 0,
@@ -111,7 +113,18 @@ const Transactions = (): JSX.Element => {
 
 export const TransactionsStore = (): ReactElement => {
   console.log('test');
+  const addTransaction = useStore((state) => state.addTransaction);
+  const getTransactions = useStore((state) => state.getTransactions);
+  const deleteTransaction = useStore((state) => state.deleteTransaction);
+  const authUser = useStore((state) => state.authUser);
+  const transactions = useStore((state) => state.transactions);
   return (
-    <Transactions />
+    <Transactions
+      addTransaction={addTransaction}
+      getTransactions={getTransactions}
+      deleteTransaction={deleteTransaction}
+      authUser={authUser}
+      transactions={transactions}
+    />
   );
 };
