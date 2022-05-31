@@ -1,18 +1,10 @@
 /* eslint-disable consistent-return */
 import { ReactElement, useEffect } from 'react';
 
-import { AuthUser } from '../../model/AuthUser';
-import { User } from '../../model/User';
 import useStore from '../../store/useStore';
+import { RegisterGoogleProps } from './Types/registerGoogleProps';
 
-type RegisterGoogleProps = {
-  isAuthUser: boolean;
-  authUser: AuthUser;
-  addUser: (user: User) => void;
-  registerUserWithGoogle: () => void;
-};
-
-export const RegisterGoogle = ({
+const RegisterGoogle = ({
   isAuthUser,
   authUser,
   addUser,
