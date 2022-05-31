@@ -1,25 +1,23 @@
 /* eslint-disable consistent-return */
 import { ReactElement, useEffect } from 'react';
 
+import { AuthUser } from '../../model/AuthUser';
+import { User } from '../../model/User';
 import useStore from '../../store/useStore';
 
-export const RegisterGoogle = (): ReactElement => {
-  const registerUserWithGoogle = useStore(
-    ({ registerUserWithGoogle }) => registerUserWithGoogle,
-  );
+type RegisterGoogleProps = {
+  isAuthUser: boolean;
+  authUser: AuthUser;
+  addUser: (user: User) => void;
+  registerUserWithGoogle: () => void;
+};
 
-  const addUser = useStore(
-    ({ addUser }) => addUser,
-  );
-
-  const isAuthUser = useStore(
-    ({ isAuthUser }) => isAuthUser,
-  );
-
-  const authUser = useStore(
-    ({ authUser }) => authUser,
-  );
-
+export const RegisterGoogle = ({
+  isAuthUser,
+  authUser,
+  addUser,
+  registerUserWithGoogle,
+}: RegisterGoogleProps): JSX.Element => {
   useEffect(() => {
     if (isAuthUser) {
       const newUser = {
@@ -44,5 +42,23 @@ export const RegisterGoogle = (): ReactElement => {
         register with google
       </button>
     </>
+  );
+};
+
+export const RegisterGoogleStore = (): ReactElement => {
+  const isAuthUser = useStore((state) => state.isAuthUser);
+  const authUser = useStore((state) => state.authUser);
+  const addUser = useStore((state) => state.addUser);
+  const registerUserWithGoogle = useStore(
+    (state) => state.registerUserWithGoogle,
+  );
+
+  return (
+    <RegisterGoogle
+      isAuthUser={isAuthUser}
+      authUser={authUser}
+      addUser={addUser}
+      registerUserWithGoogle={registerUserWithGoogle}
+    />
   );
 };
