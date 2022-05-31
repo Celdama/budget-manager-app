@@ -76,9 +76,9 @@ const Transactions = ({
   return (
     <div>
       create transaction
-      <h1>{`Hello ${authUser.displayName}`}</h1>
-      <img src={`${authUser.photoURL}`} alt="avatar" />
-      <p>{`${authUser.email}`}</p>
+      <h1>{`Hello ${currentUser.displayName} - ${currentUser.amount} $`}</h1>
+      <img src={`${currentUser.photoURL}`} alt="avatar" />
+      <p>{`${currentUser.email}`}</p>
       <form>
         <input
           type="text"
