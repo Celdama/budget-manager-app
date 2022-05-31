@@ -23,7 +23,12 @@ HOME PAGE
 
 # recuperer la somme totale de l'utilisateur connecté [x] 
 
+# modifier amount en fonction de la nouvelle transaction
+  # incrementeAmount(transactionAmount) => income
+  # decrementeAmount(transactionAmount) => expense
 
+
+'
 
 
 

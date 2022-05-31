@@ -49,7 +49,7 @@ const Transactions = ({
         userId: authUser.uid,
         date: new Date().toString(),
       };
-      addTransaction(newTransaction);
+      addTransaction(newTransaction, currentUser.amount);
       setFormTransaction({
         name: '',
         amount: 0,

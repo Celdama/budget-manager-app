@@ -6,7 +6,7 @@ export type TransactionsProps = {
   transactions: Transaction[];
   authUser: AuthUser;
   currentUser: User;
-  addTransaction: (transaction: Transaction) => void;
+  addTransaction: (transaction: Transaction, currentUserAmount: number) => void;
   getTransactions: (authUserId: string) => void;
   deleteTransaction: (transaction: Transaction) => void;
   setCurrentUser: (userId: string) => void;
