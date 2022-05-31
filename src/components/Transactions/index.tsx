@@ -119,6 +119,7 @@ export const TransactionsStore = (): ReactElement => {
   const authUser = useStore((state) => state.authUser);
   const transactions = useStore((state) => state.transactions);
   const setCurrentUser = useStore((state) => state.setCurrentUser);
+  const currentUser = useStore((state) => state.currentUser);
   return (
     <Transactions
       addTransaction={addTransaction}
@@ -127,6 +128,7 @@ export const TransactionsStore = (): ReactElement => {
       authUser={authUser}
       transactions={transactions}
       setCurrentUser={setCurrentUser}
+      currentUser={currentUser}
     />
   );
 };
