@@ -32,7 +32,7 @@ const createAuthUserSlice = (
         set({
           authUser: { displayName, uid, email, photoURL },
           isAuthUser: true,
-        }, false, 'authUser.registerUserWithGoogle');
+        }, false, 'authSlice.registerUserWithGoogle');
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -45,7 +45,7 @@ const createAuthUserSlice = (
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { email, displayName, uid, photoURL } = user;
-        set({ authUser: { email, displayName, uid, photoURL } }, false, 'authUser.getAuthUser');
+        set({ authUser: { email, displayName, uid, photoURL } }, false, 'authSlice.getAuthUser');
       } else {
         console.log('not login');
       }
