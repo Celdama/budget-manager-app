@@ -3,8 +3,9 @@ import { Transaction } from '../../../model/Transaction';
 
 export type TransactionsProps = {
   transactions: Transaction[];
+  authUser: AuthUser;
   addTransaction: (transaction: Transaction) => void;
   getTransactions: (authUserId: string) => void;
   deleteTransaction: (transaction: Transaction) => void;
-  authUser: AuthUser;
+  setCurrentUser: (userId: string) => void;
 }
