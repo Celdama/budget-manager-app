@@ -33,12 +33,16 @@ const createUserSlice = (
   },
   setCurrentUser: async (userId: string) => {
     const docRef = doc(db, 'users', userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
+    try {
+      const docSnap = await getDoc(docRef);
       console.log('document data', docSnap.data());
-    } else {
-      console.log('no such document');
+      set(
+        { currentUser: docSnap.data() as User },
+        false,
+        'userSlice.setCurrentUser',
+      );
+    } catch (error) {
+      console.log(error);
     }
   },
 });

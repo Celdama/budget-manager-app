@@ -12,6 +12,7 @@ const Transactions = ({
   addTransaction,
   getTransactions,
   deleteTransaction,
+  setCurrentUser,
   authUser,
   transactions,
 }: TransactionsProps): JSX.Element => {
@@ -21,11 +22,10 @@ const Transactions = ({
     category: '',
   });
 
-  // console.log(authUser);
-
   useEffect(() => {
     if (authUser.email) {
       getTransactions(authUser.uid);
+      setCurrentUser(authUser.uid);
     }
   }, [authUser]);
 
