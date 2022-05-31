@@ -23,7 +23,6 @@ const Transactions = ({
 
   useEffect(() => {
     if (authUser.email) {
-      console.log(authUser.email);
       getTransactions(authUser.uid);
     }
   }, [authUser]);
