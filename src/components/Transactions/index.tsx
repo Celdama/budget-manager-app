@@ -2,7 +2,7 @@
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
 import { nanoid } from 'nanoid';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 
 import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
@@ -109,4 +109,9 @@ const Transactions = (): JSX.Element => {
   );
 };
 
-export default Transactions;
+export const TransactionsStore = (): ReactElement => {
+  console.log('test');
+  return (
+    <Transactions />
+  );
+};
