@@ -21,6 +21,4 @@ HOME PAGE
 
 ```
 
-// install styled component - tailwind - tailwind-styled-component
-// créer le global style
-// faire un composant bidon
+# recuperer la somme totale de l'utilisateur connecté

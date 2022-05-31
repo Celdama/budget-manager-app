@@ -21,6 +21,8 @@ const Transactions = ({
     category: '',
   });
 
+  // console.log(authUser);
+
   useEffect(() => {
     if (authUser.email) {
       getTransactions(authUser.uid);
