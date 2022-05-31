@@ -111,7 +111,6 @@ const Transactions = ({
 };
 
 export const TransactionsStore = (): ReactElement => {
-  console.log('test');
   const addTransaction = useStore((state) => state.addTransaction);
   const getTransactions = useStore((state) => state.getTransactions);
   const deleteTransaction = useStore((state) => state.deleteTransaction);
