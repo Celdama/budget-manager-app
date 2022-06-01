@@ -43,10 +43,7 @@ const createTransactionSlice = (
       })
       .then(() => {
         set(
-          (state) => ({
-            ...state,
-            transactions: [...authUserTransactionsList],
-          }),
+          { transactions: [...authUserTransactionsList] },
           false,
           'transactionSlice.getTransactions',
         );
@@ -91,10 +88,7 @@ const createTransactionSlice = (
         console.log(error);
       });
   },
-  deleteTransaction: (
-    transaction: Transaction,
-    currentUserAmount: number,
-  ) => {
+  deleteTransaction: (transaction: Transaction, currentUserAmount: number) => {
     const { uid, userId, amount, category } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
     deleteDoc(doc(db, 'transactions', uid))
@@ -115,7 +109,8 @@ const createTransactionSlice = (
               ...state.currentUser,
               amount:
                 category === 'expense'
-                  ? currentUserAmount + amount : currentUserAmount - amount,
+                  ? currentUserAmount + amount
+                  : currentUserAmount - amount,
             },
             transactions: state.transactions.filter(
               (transaction) => transaction.uid !== uid,
