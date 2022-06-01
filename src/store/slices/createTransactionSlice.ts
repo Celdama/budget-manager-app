@@ -14,7 +14,6 @@ export interface TransactionSlice {
     transaction: Transaction,
     currentUserAmount: number
   ) => void;
-  // incrementeAmount: (transactionAmount: number) => void
 }
 
 const createTransactionSlice = (
