@@ -8,6 +8,9 @@ export type TransactionsProps = {
   currentUser: User;
   addTransaction: (transaction: Transaction, currentUserAmount: number) => void;
   getTransactions: (authUserId: string) => void;
-  deleteTransaction: (transaction: Transaction) => void;
+  deleteTransaction: (
+    transaction: Transaction,
+    currentUserAmount: number
+  ) => void;
   setCurrentUser: (userId: string) => void;
-}
+};

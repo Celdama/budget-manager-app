@@ -10,7 +10,10 @@ export interface TransactionSlice {
   transactions: Transaction[];
   getTransactions: (authUserId: string) => void;
   addTransaction: (transaction: Transaction, currentUserAmount: number) => void;
-  deleteTransaction: (transaction: Transaction) => void;
+  deleteTransaction: (
+    transaction: Transaction,
+    currentUserAmount: number
+  ) => void;
   // incrementeAmount: (transactionAmount: number) => void
 }
 
@@ -75,9 +78,10 @@ const createTransactionSlice = (
             ...state,
             currentUser: {
               ...state.currentUser,
-              amount: category === 'expense'
-                ? currentUserAmount - amount
-                : currentUserAmount + amount,
+              amount:
+                category === 'expense'
+                  ? currentUserAmount - amount
+                  : currentUserAmount + amount,
             },
             transactions: [...state.transactions, transaction],
           }),
@@ -89,7 +93,10 @@ const createTransactionSlice = (
         console.log(error);
       });
   },
-  deleteTransaction: (transaction: Transaction) => {
+  deleteTransaction: (
+    transaction: Transaction,
+    currentUserUserAmount: number,
+  ) => {
     const { uid, userId } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
     deleteDoc(doc(db, 'transactions', uid))
