@@ -56,8 +56,6 @@ const createTransactionSlice = (
       });
   },
   addTransaction: (transaction: Transaction, currentUserAmount: number) => {
-    console.log(currentUserAmount);
-    console.log(transaction);
     const { uid, userId, amount, category } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
     setDoc(doc(db, 'transactions', uid), {
