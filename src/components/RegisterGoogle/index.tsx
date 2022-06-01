@@ -16,7 +16,6 @@ const RegisterGoogle = ({
         ...authUser,
         amount: 0,
         investAmount: 0,
-        totalAmount: 0,
         transactionsId: [],
       };
       addUserInFirestore(newUser);
