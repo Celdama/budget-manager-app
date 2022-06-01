@@ -31,7 +31,7 @@ const Transactions = ({
     }
   }, [authUser]);
 
-  const { displayName, amount, investAmount, totalAmount, photoURL, email } = currentUser;
+  const { displayName, amount, investAmount, photoURL, email } = currentUser;
 
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
