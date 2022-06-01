@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
@@ -62,13 +63,19 @@ const Transactions = ({
     <p key={transaction.uid}>
       {transaction.name}
       {' '}
-      -
-      {' '}
-      {transaction.amount}
-      ------
-      {' '}
-      <button type="button" onClick={() => deleteTransaction(transaction)}>
-        x
+      <span
+        className={`${transaction.category === 'expense'
+          ? 'text-red-600'
+          : 'text-green-600'}`}
+      >
+        {`${transaction.category === 'expense' ? '-' : '+'} ${transaction.amount}`}
+      </span>
+      <button
+        type="button"
+        className="ml-4 border text-sm rounded-md"
+        onClick={() => deleteTransaction(transaction)}
+      >
+        delete
       </button>
     </p>
   ));
@@ -76,7 +83,13 @@ const Transactions = ({
   return (
     <div>
       create transaction
-      <h1>{`Hello ${currentUser.displayName} - ${currentUser.amount} $`}</h1>
+      <h1>
+        {`Hello ${currentUser.displayName} | `}
+        <span className={`${currentUser.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+          {currentUser.amount}
+          $
+        </span>
+      </h1>
       <img src={`${currentUser.photoURL}`} alt="avatar" />
       <p>{`${currentUser.email}`}</p>
       <form>
