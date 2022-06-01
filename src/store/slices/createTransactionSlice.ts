@@ -71,8 +71,15 @@ const createTransactionSlice = (
       })
       .then(() => {
         set(
-          ({ transactions }) => ({
-            transactions: [...transactions, transaction],
+          (state) => ({
+            ...state,
+            currentUser: {
+              ...state.currentUser,
+              amount: category === 'expense'
+                ? currentUserAmount - amount
+                : currentUserAmount + amount,
+            },
+            transactions: [...state.transactions, transaction],
           }),
           false,
           'transactionSlice.addTransaction',
@@ -106,7 +113,6 @@ const createTransactionSlice = (
         console.log(error);
       });
   },
-  // incrementeAmount: (transactionAmount: number) => { },
 });
 
 export default createTransactionSlice;
