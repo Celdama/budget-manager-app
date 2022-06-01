@@ -95,20 +95,31 @@ const createTransactionSlice = (
   },
   deleteTransaction: (
     transaction: Transaction,
-    currentUserUserAmount: number,
+    currentUserAmount: number,
   ) => {
-    const { uid, userId } = transaction;
+    const { uid, userId, amount, category } = transaction;
     const transactionsDoc = doc(db, 'users', userId);
     deleteDoc(doc(db, 'transactions', uid))
       .then(() => {
         updateDoc(transactionsDoc, {
           transactionsId: arrayRemove(uid),
+          amount:
+            category === 'expense'
+              ? currentUserAmount + amount
+              : currentUserAmount - amount,
         });
       })
       .then(() => {
         set(
-          ({ transactions }) => ({
-            transactions: transactions.filter(
+          (state) => ({
+            ...state,
+            currentUser: {
+              ...state.currentUser,
+              amount:
+                category === 'expense'
+                  ? currentUserAmount + amount : currentUserAmount - amount,
+            },
+            transactions: state.transactions.filter(
               (transaction) => transaction.uid !== uid,
             ),
           }),
