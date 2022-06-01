@@ -31,6 +31,8 @@ const Transactions = ({
     }
   }, [authUser]);
 
+  const { displayName, amount, photoURL, email } = currentUser;
+
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
   ): void => {
@@ -50,7 +52,7 @@ const Transactions = ({
         userId: authUser.uid,
         date: new Date().toString(),
       };
-      addTransaction(newTransaction, currentUser.amount);
+      addTransaction(newTransaction, amount);
       setFormTransaction({
         name: '',
         amount: 0,
@@ -59,39 +61,42 @@ const Transactions = ({
     }
   };
 
-  const transactionsList = transactions.map((transaction: Transaction) => (
-    <p key={transaction.uid}>
-      {transaction.name}
-      {' '}
-      <span
-        className={`${transaction.category === 'expense'
-          ? 'text-red-600'
-          : 'text-green-600'}`}
-      >
-        {`${transaction.category === 'expense' ? '-' : '+'} ${transaction.amount} $`}
-      </span>
-      <button
-        type="button"
-        className="ml-4 border text-sm rounded-md"
-        onClick={() => deleteTransaction(transaction, currentUser.amount)}
-      >
-        delete
-      </button>
-    </p>
-  ));
+  const transactionsList = transactions.map((transaction: Transaction) => {
+    const { uid, name, category, amount } = transaction;
+    return (
+      <p key={uid}>
+        {name}
+        {' '}
+        <span
+          className={`${category === 'expense'
+            ? 'text-red-600'
+            : 'text-green-600'}`}
+        >
+          {`${category === 'expense' ? '-' : '+'} ${amount} $`}
+        </span>
+        <button
+          type="button"
+          className="ml-4 border text-sm rounded-md"
+          onClick={() => deleteTransaction(transaction, amount)}
+        >
+          delete
+        </button>
+      </p>
+    );
+  });
 
   return (
     <div>
       create transaction
       <h1>
-        {`Hello ${currentUser.displayName} | `}
-        <span className={`${currentUser.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-          {currentUser.amount}
+        {`Hello ${displayName} | `}
+        <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+          {amount}
           $
         </span>
       </h1>
-      <img src={`${currentUser.photoURL}`} alt="avatar" />
-      <p>{`${currentUser.email}`}</p>
+      <img src={`${photoURL}`} alt="avatar" />
+      <p>{`${email}`}</p>
       <form>
         <input
           type="text"
