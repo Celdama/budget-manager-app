@@ -31,7 +31,7 @@ const Transactions = ({
     }
   }, [authUser]);
 
-  const { displayName, amount, photoURL, email } = currentUser;
+  const { displayName, amount, investAmount, totalAmount, photoURL, email } = currentUser;
 
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
@@ -90,10 +90,34 @@ const Transactions = ({
       create transaction
       <h1>
         {`Hello ${displayName} | `}
-        <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-          {amount}
-          $
-        </span>
+        <br />
+        <ul>
+          <li>
+            <span>amount</span>
+            {' '}
+            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+              {amount}
+              $
+            </span>
+          </li>
+          <li>
+            <span>invest amount</span>
+            {' '}
+            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+              {investAmount}
+              $
+            </span>
+          </li>
+          <li>
+            <span>total amount</span>
+            {' '}
+            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+              {investAmount + amount}
+              $
+            </span>
+          </li>
+        </ul>
+
       </h1>
       <img src={`${photoURL}`} alt="avatar" />
       <p>{`${email}`}</p>
