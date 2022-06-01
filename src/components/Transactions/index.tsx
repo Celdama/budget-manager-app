@@ -68,7 +68,7 @@ const Transactions = ({
           ? 'text-red-600'
           : 'text-green-600'}`}
       >
-        {`${transaction.category === 'expense' ? '-' : '+'} ${transaction.amount}`}
+        {`${transaction.category === 'expense' ? '-' : '+'} ${transaction.amount} $`}
       </span>
       <button
         type="button"
