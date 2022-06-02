@@ -6,7 +6,11 @@ import { NamedSetState } from '../middlewares/middleware';
 import { MyState } from '../useStore';
 
 export interface InvestmentSlice {
-  investments: [],
+  investments: [];
+  addInvestment: (
+    investment: Investment,
+    currentUserInvestAmount: number
+  ) => void;
 }
 
 const createInvestmentSlice = (
