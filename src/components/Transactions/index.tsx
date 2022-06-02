@@ -86,55 +86,60 @@ const Transactions = ({
   });
 
   return (
-    <div>
-      create transaction
+    <div className="p-7">
       <h1>
-        {`Hello ${displayName} | `}
-        <br />
-        <ul>
-          <li>
-            <span>amount</span>
-            {' '}
-            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {amount}
-              $
-            </span>
-          </li>
-          <li>
-            <span>invest amount</span>
-            {' '}
-            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {investAmount}
-              $
-            </span>
-          </li>
-          <li>
-            <span>total amount</span>
-            {' '}
-            <span className={`${amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {investAmount + amount}
-              $
-            </span>
-          </li>
-        </ul>
-
+        {`Hello ${displayName} from Google Auth`}
       </h1>
+      <br />
       <img src={`${photoURL}`} alt="avatar" />
       <p>{`${email}`}</p>
-      <form>
+      <br />
+      <ul>
+        <li>
+          <span>amount</span>
+          {' '}
+          <span className={`${amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {amount}
+            $
+          </span>
+        </li>
+        <li>
+          <span>invest amount</span>
+          {' '}
+          <span className={`${investAmount >= 1 ? 'text-green-600' : 'text-red-600'}`}>
+            {investAmount}
+            $
+          </span>
+        </li>
+        <li>
+          <span>total amount</span>
+          {' '}
+          <span className={`${investAmount + amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {investAmount + amount}
+            $
+          </span>
+        </li>
+      </ul>
+      <h2 className="underline">
+        add new transaction
+      </h2>
+      <form className="border p-6">
         <input
           type="text"
           name="name"
+          placeholder="transaction name"
+          className="border"
           value={formTransaction.name}
           onChange={handleChange}
         />
+        <br />
         <input
           type="number"
           name="amount"
           value={formTransaction.amount}
           onChange={handleChange}
         />
-
+        <br />
         <select
           name="category"
           value={formTransaction.category}
@@ -144,13 +149,17 @@ const Transactions = ({
           <option value="expense">Expense</option>
           <option value="income">Income</option>
         </select>
-
+        <br />
         <button type="submit" onClick={(e) => handleAddTransaction(e)}>
           add
         </button>
       </form>
-      <h2>transactions List</h2>
-      {transactionsList}
+      <h2 className="underline">transactions List</h2>
+      <div>
+        {transactionsList}
+      </div>
+      <br />
+      <h2 className="underline">add new invest</h2>
     </div>
   );
 };
