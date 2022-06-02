@@ -5,6 +5,7 @@ import useStore from '../../store/useStore';
 import { InvestmentsProps } from './Types/investmentsProps';
 
 const Investment = ({
+  investments,
   getInvestments,
   addInvestment,
   authUser,
@@ -90,6 +91,7 @@ const Investment = ({
 };
 
 export const InvestmentStore = (): JSX.Element => {
+  const investments = useStore((state) => state.investments);
   const addInvestment = useStore((state) => state.addInvestment);
   const authUser = useStore((state) => state.authUser);
   const currentUser = useStore((state) => state.currentUser);
