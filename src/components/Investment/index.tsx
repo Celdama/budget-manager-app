@@ -86,9 +86,11 @@ export const InvestmentStore = (): JSX.Element => {
   const addInvestment = useStore((state) => state.addInvestment);
   const authUser = useStore((state) => state.authUser);
   const currentUser = useStore((state) => state.currentUser);
+  const getInvestments = useStore((state) => state.getInvestments);
   return (
     <Investment
       addInvestment={addInvestment}
+      getInvestments={getInvestments}
       authUser={authUser}
       currentUser={currentUser}
     />

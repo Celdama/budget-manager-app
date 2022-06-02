@@ -5,6 +5,7 @@ import { User } from '../../../model/User';
 export type InvestmentsProps = {
   authUser: AuthUser;
   currentUser: User;
+  getInvestments: (authUserId: string) => void;
   addInvestment: (
     investment: Investment,
     currentUserInvestAmount: number
