@@ -3,6 +3,7 @@ import { Investment } from '../../../model/Investment';
 import { User } from '../../../model/User';
 
 export type InvestmentsProps = {
+  investments: Investment[];
   authUser: AuthUser;
   currentUser: User;
   getInvestments: (authUserId: string) => void;

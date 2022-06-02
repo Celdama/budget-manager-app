@@ -5,7 +5,6 @@
 import { nanoid } from 'nanoid';
 import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 
-import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
 import { InvestmentStore } from '../Investment';
 import { TransactionsProps } from './Types/transactionsProps';
@@ -62,7 +61,7 @@ const Transactions = ({
     }
   };
 
-  const transactionsList = transactions.map((transaction: Transaction) => {
+  const transactionsList = transactions.map((transaction) => {
     const { uid, name, category, amount } = transaction;
     return (
       <p key={uid}>

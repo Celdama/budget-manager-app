@@ -55,38 +55,56 @@ const Investment = ({
     }
   };
 
+  const investmentsList = investments.map((investment) => {
+    const { uid, name, category, amount } = investment;
+    return (
+      <p key={uid}>
+        {name}
+        {' '}
+        <span className="text-green-600">
+          {`+${amount} $`}
+        </span>
+      </p>
+    );
+  });
+
   return (
-    <form className="border p-6">
-      <input
-        type="text"
-        name="name"
-        placeholder="investment name"
-        className="border"
-        value={formInvestment.name}
-        onChange={handleChange}
-      />
-      <br />
-      <input
-        type="number"
-        name="amount"
-        value={formInvestment.amount}
-        onChange={handleChange}
-      />
-      <br />
-      <select
-        name="category"
-        value={formInvestment.category}
-        onChange={handleChange}
-      >
-        <option value="">--Please choose a category--</option>
-        <option value="crypto">crypto</option>
-        <option value="other">other</option>
-      </select>
-      <br />
-      <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
-        add
-      </button>
-    </form>
+    <>
+
+      <form className="border p-6">
+        <input
+          type="text"
+          name="name"
+          placeholder="investment name"
+          className="border"
+          value={formInvestment.name}
+          onChange={handleChange}
+        />
+        <br />
+        <input
+          type="number"
+          name="amount"
+          value={formInvestment.amount}
+          onChange={handleChange}
+        />
+        <br />
+        <select
+          name="category"
+          value={formInvestment.category}
+          onChange={handleChange}
+        >
+          <option value="">--Please choose a category--</option>
+          <option value="crypto">crypto</option>
+          <option value="other">other</option>
+        </select>
+        <br />
+        <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
+          add
+        </button>
+      </form>
+      {investmentsList}
+    </>
+
   );
 };
 
@@ -98,6 +116,7 @@ export const InvestmentStore = (): JSX.Element => {
   const getInvestments = useStore((state) => state.getInvestments);
   return (
     <Investment
+      investments={investments}
       addInvestment={addInvestment}
       getInvestments={getInvestments}
       authUser={authUser}
