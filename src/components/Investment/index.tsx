@@ -23,7 +23,7 @@ const Investment = ({
     const { name, value } = e.target as HTMLInputElement;
     setFormInvestment((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: name === 'amount' ? +value : value,
     }));
   };
 
