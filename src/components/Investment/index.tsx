@@ -47,7 +47,7 @@ const Investment = ({
       <input
         type="text"
         name="name"
-        placeholder="transaction name"
+        placeholder="investment name"
         className="border"
         value={formInvestment.name}
         onChange={handleChange}
@@ -66,8 +66,8 @@ const Investment = ({
         onChange={handleChange}
       >
         <option value="">--Please choose a category--</option>
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
+        <option value="expense">crypto</option>
+        <option value="income">other</option>
       </select>
       <br />
       <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
