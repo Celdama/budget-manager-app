@@ -8,7 +8,7 @@ import { MyState } from '../useStore';
 
 export interface InvestmentSlice {
   investments: Investment[];
-  getInvestments: () => void;
+  getInvestments: (authUserId: string) => void;
   addInvestment: (
     investment: Investment,
     currentUserInvestAmount: number
