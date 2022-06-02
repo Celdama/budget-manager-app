@@ -2,8 +2,12 @@ import { nanoid } from 'nanoid';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import useStore from '../../store/useStore';
+import { InvestmentsProps } from './Types/investmentsProps';
 
-const Investment = ({ addInvestment, authUser }): JSX.Element => {
+const Investment = ({
+  addInvestment,
+  authUser,
+}: InvestmentsProps): JSX.Element => {
   const [formInvestment, setFormInvestment] = useState({
     name: '',
     amount: 0,
@@ -32,11 +36,11 @@ const Investment = ({ addInvestment, authUser }): JSX.Element => {
     }
   };
 
-  return (<p>invest</p>);
+  return <p>invest</p>;
 };
 
 export const InvestmentStore = (): JSX.Element => {
   const addInvestment = useStore((state) => state.addInvestment);
   const authUser = useStore((state) => state.authUser);
-  return (<Investment addInvestment={addInvestment} authUser={authUser} />);
+  return <Investment addInvestment={addInvestment} authUser={authUser} />;
 };
