@@ -7,6 +7,7 @@ import { InvestmentsProps } from './Types/investmentsProps';
 const Investment = ({
   addInvestment,
   authUser,
+  currentUser,
 }: InvestmentsProps): JSX.Element => {
   const [formInvestment, setFormInvestment] = useState({
     name: '',
@@ -26,7 +27,9 @@ const Investment = ({
     }));
   };
 
-  const handlaAddInvestment = (e: MouseEvent<HTMLButtonElement>): void => {
+  const handlaAddInvestment = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ): void => {
     e.preventDefault();
     if (formInvestment.name.length) {
       const newInvestment = {
@@ -35,11 +38,43 @@ const Investment = ({
         userId: authUser.uid,
         date: new Date().toString(),
       };
-      addInvestment(newInvestment);
+      addInvestment(newInvestment, investAmount);
     }
   };
 
-  return <p>invest</p>;
+  return (
+    <form className="border p-6">
+      <input
+        type="text"
+        name="name"
+        placeholder="transaction name"
+        className="border"
+        value={formInvestment.name}
+        onChange={handleChange}
+      />
+      <br />
+      <input
+        type="number"
+        name="amount"
+        value={formInvestment.amount}
+        onChange={handleChange}
+      />
+      <br />
+      <select
+        name="category"
+        value={formInvestment.category}
+        onChange={handleChange}
+      >
+        <option value="">--Please choose a category--</option>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+      <br />
+      <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
+        add
+      </button>
+    </form>
+  );
 };
 
 export const InvestmentStore = (): JSX.Element => {

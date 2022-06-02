@@ -7,6 +7,7 @@ import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 
 import { Transaction } from '../../model/Transaction';
 import useStore from '../../store/useStore';
+import { InvestmentStore } from '../Investment';
 import { TransactionsProps } from './Types/transactionsProps';
 
 const Transactions = ({
@@ -160,6 +161,7 @@ const Transactions = ({
       </div>
       <br />
       <h2 className="underline">add new invest</h2>
+      <InvestmentStore />
     </div>
   );
 };
