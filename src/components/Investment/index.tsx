@@ -1,10 +1,11 @@
 import { nanoid } from 'nanoid';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import useStore from '../../store/useStore';
 import { InvestmentsProps } from './Types/investmentsProps';
 
 const Investment = ({
+  getInvestments,
   addInvestment,
   authUser,
   currentUser,
@@ -14,6 +15,12 @@ const Investment = ({
     amount: 0,
     category: '',
   });
+
+  useEffect(() => {
+    if (authUser.displayName) {
+      getInvestments(authUser.uid);
+    }
+  }, [authUser]);
 
   const { investAmount } = currentUser;
 
