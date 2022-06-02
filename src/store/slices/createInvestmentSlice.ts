@@ -10,6 +10,9 @@ const createInvestmentSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   investments: [],
+  // addInvestment: () => {
+
+  // }
 });
 
 export default createInvestmentSlice;
