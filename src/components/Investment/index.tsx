@@ -14,6 +14,8 @@ const Investment = ({
     category: '',
   });
 
+  const { investAmount } = currentUser;
+
   const handleChange = (
     e: FormEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>,
   ): void => {
@@ -33,6 +35,7 @@ const Investment = ({
         userId: authUser.uid,
         date: new Date().toString(),
       };
+      addInvestment(newInvestment);
     }
   };
 
@@ -42,5 +45,12 @@ const Investment = ({
 export const InvestmentStore = (): JSX.Element => {
   const addInvestment = useStore((state) => state.addInvestment);
   const authUser = useStore((state) => state.authUser);
-  return <Investment addInvestment={addInvestment} authUser={authUser} />;
+  const currentUser = useStore((state) => state.currentUser);
+  return (
+    <Investment
+      addInvestment={addInvestment}
+      authUser={authUser}
+      currentUser={currentUser}
+    />
+  );
 };
