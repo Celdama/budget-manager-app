@@ -71,8 +71,8 @@ const Investment = ({
         onChange={handleChange}
       >
         <option value="">--Please choose a category--</option>
-        <option value="expense">crypto</option>
-        <option value="income">other</option>
+        <option value="crypto">crypto</option>
+        <option value="other">other</option>
       </select>
       <br />
       <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
