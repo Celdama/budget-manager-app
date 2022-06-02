@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '../../config/firebaseConfig';
 import { Investment } from '../../model/Investment';
@@ -20,6 +20,35 @@ const createInvestmentSlice = (
   get: NamedSetState<MyState>,
 ) => ({
   investments: [],
+  getInvestments: (authUserId: string) => {
+    const investmentsCollectionRef = collection(db, 'investments');
+    const authUserInvestmentsList: Investment[] = [];
+    getDocs(investmentsCollectionRef)
+      .then((docs) => {
+        docs.forEach((doc) => {
+          const { name, amount, uid, date, category, userId } = doc.data();
+          if (userId === authUserId) {
+            authUserInvestmentsList.push({
+              name,
+              amount,
+              uid,
+              date,
+              category,
+              userId,
+            });
+          }
+        });
+      }).then(() => {
+        set(
+          { investments: [...authUserInvestmentsList] },
+          false,
+          'investmentSlice.getInvestments',
+        );
+      })
+      .catch((error) => {
+        console.log('from investmentSlice.getInvestments ', error);
+      });
+  },
   addInvestment: (investment: Investment, currentUserInvestAmount: number) => {
     const { uid, userId, amount, category } = investment;
     const investementsDoc = doc(db, 'users', userId);
