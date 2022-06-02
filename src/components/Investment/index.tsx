@@ -39,6 +39,11 @@ const Investment = ({
         date: new Date().toString(),
       };
       addInvestment(newInvestment, investAmount);
+      setFormInvestment({
+        name: '',
+        amount: 0,
+        category: '',
+      });
     }
   };
 
