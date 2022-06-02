@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '../../config/firebaseConfig';
@@ -6,7 +7,7 @@ import { NamedSetState } from '../middlewares/middleware';
 import { MyState } from '../useStore';
 
 export interface InvestmentSlice {
-  investments: [];
+  investments: Investment[];
   addInvestment: (
     investment: Investment,
     currentUserInvestAmount: number
