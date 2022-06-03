@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const index = (): JSX.Element => (
+export const Dashboard = (): JSX.Element => (
   <div>Dashboard</div>
 );
