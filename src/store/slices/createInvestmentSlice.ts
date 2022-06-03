@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { arrayUnion, collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '../../config/firebaseConfig';
 import { Investment } from '../../model/Investment';
@@ -87,7 +87,36 @@ const createInvestmentSlice = (
   deleteInvestment: (
     investment: Investment,
     currentUserInvestAmount: number,
-  ) => { },
+  ) => {
+    const { uid, userId, amount, category } = investment;
+    const investementsDoc = doc(db, 'users', userId);
+    deleteDoc(doc(db, 'transactions', uid))
+      .then(() => {
+        updateDoc(investementsDoc, {
+          investmentsId: arrayRemove(uid),
+          investAmount: currentUserInvestAmount - amount,
+        });
+      })
+      .then(() => {
+        set(
+          (state) => ({
+            ...state,
+            currentUser: {
+              ...state.currentUser,
+              investAmount: currentUserInvestAmount - amount,
+            },
+            investments: state.investments.filter(
+              (investment) => investment.uid !== uid,
+            ),
+          }),
+          false,
+          'investmentSlice.deleteinvestment',
+        );
+      })
+      .catch((error) => {
+        console.log('from investmentSlice.deleteInvestment', error);
+      });
+  },
 });
 
 export default createInvestmentSlice;
