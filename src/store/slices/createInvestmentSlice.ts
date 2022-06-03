@@ -13,6 +13,10 @@ export interface InvestmentSlice {
     investment: Investment,
     currentUserInvestAmount: number
   ) => void;
+  deleteInvestment: (
+    investment: Investment,
+    currentUserInvestAmount: number
+  ) => void;
 }
 
 const createInvestmentSlice = (
@@ -38,7 +42,8 @@ const createInvestmentSlice = (
             });
           }
         });
-      }).then(() => {
+      })
+      .then(() => {
         set(
           { investments: [...authUserInvestmentsList] },
           false,
@@ -79,9 +84,10 @@ const createInvestmentSlice = (
         console.log(error);
       });
   },
-  deleteInvestment: (investment: Investment, currentUserInvestAmount: number) => {
-
-  },
+  deleteInvestment: (
+    investment: Investment,
+    currentUserInvestAmount: number,
+  ) => { },
 });
 
 export default createInvestmentSlice;
