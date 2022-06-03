@@ -80,7 +80,7 @@ const Transactions = ({
         <button
           type="button"
           className="ml-4 border text-sm rounded-md"
-          onClick={() => deleteTransaction(transaction, amount)}
+          onClick={() => deleteTransaction(transaction, currentUserAmount)}
         >
           delete
         </button>
