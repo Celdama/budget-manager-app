@@ -11,4 +11,8 @@ export type InvestmentsProps = {
     investment: Investment,
     currentUserInvestAmount: number
   ) => void;
+  deleteInvestment: (
+    investment: Investment,
+    currentUserInvestAmount: number
+  ) => void;
 };
