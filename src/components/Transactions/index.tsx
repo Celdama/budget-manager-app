@@ -64,16 +64,18 @@ const Transactions = ({
   const transactionsList = transactions.map((transaction) => {
     const { uid, name, category, amount } = transaction;
     return (
-      <p key={uid}>
-        {name}
-        {' '}
-        <span
-          className={`${category === 'expense'
-            ? 'text-red-600'
-            : 'text-green-600'}`}
-        >
-          {`${category === 'expense' ? '-' : '+'} ${amount} $`}
-        </span>
+      <div className="flex">
+        <p key={uid}>
+          {name}
+          {' '}
+          <span
+            className={`${category === 'expense'
+              ? 'text-red-600'
+              : 'text-green-600'}`}
+          >
+            {`${category === 'expense' ? '-' : '+'} ${amount} $`}
+          </span>
+        </p>
         <button
           type="button"
           className="ml-4 border text-sm rounded-md"
@@ -81,7 +83,7 @@ const Transactions = ({
         >
           delete
         </button>
-      </p>
+      </div>
     );
   });
 
