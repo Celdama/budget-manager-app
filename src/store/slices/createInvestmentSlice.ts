@@ -79,6 +79,9 @@ const createInvestmentSlice = (
         console.log(error);
       });
   },
+  deleteInvestment: (investment: Investment, currentUserInvestAmount: number) => {
+
+  },
 });
 
 export default createInvestmentSlice;
