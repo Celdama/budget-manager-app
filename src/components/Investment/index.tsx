@@ -70,7 +70,7 @@ const Investment = ({
         <button
           type="button"
           className="ml-4 border text-sm rounded-md"
-          onClick={() => deleteInvestment(investment, amount)}
+          onClick={() => deleteInvestment(investment, currentUser.investAmount)}
         >
           delete
         </button>
