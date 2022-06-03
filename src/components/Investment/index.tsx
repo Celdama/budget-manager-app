@@ -25,6 +25,7 @@ const Investment = ({
   }, [authUser]);
 
   const { investAmount } = currentUser;
+  const { name, amount, category } = formInvestment;
 
   const handleChange = (
     e: FormEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>,
@@ -40,7 +41,7 @@ const Investment = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
     e.preventDefault();
-    if (formInvestment.name.length) {
+    if (name.length) {
       const newInvestment = {
         ...formInvestment,
         uid: nanoid(),
@@ -57,7 +58,7 @@ const Investment = ({
   };
 
   const investmentsList = investments.map((investment) => {
-    const { uid, name, category, amount } = investment;
+    const { uid, name, amount } = investment;
     return (
       <div className="flex">
         <p key={uid}>
@@ -70,7 +71,7 @@ const Investment = ({
         <button
           type="button"
           className="ml-4 border text-sm rounded-md"
-          onClick={() => deleteInvestment(investment, currentUser.investAmount)}
+          onClick={() => deleteInvestment(investment, investAmount)}
         >
           delete
         </button>
@@ -87,20 +88,20 @@ const Investment = ({
           name="name"
           placeholder="investment name"
           className="border"
-          value={formInvestment.name}
+          value={name}
           onChange={handleChange}
         />
         <br />
         <input
           type="number"
           name="amount"
-          value={formInvestment.amount}
+          value={amount}
           onChange={handleChange}
         />
         <br />
         <select
           name="category"
-          value={formInvestment.category}
+          value={category}
           onChange={handleChange}
         >
           <option value="">--Please choose a category--</option>
