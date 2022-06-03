@@ -81,7 +81,6 @@ const Investment = ({
 
   return (
     <>
-
       <form className="border p-6">
         <input
           type="text"
