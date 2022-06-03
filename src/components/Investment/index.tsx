@@ -59,13 +59,22 @@ const Investment = ({
   const investmentsList = investments.map((investment) => {
     const { uid, name, category, amount } = investment;
     return (
-      <p key={uid}>
-        {name}
-        {' '}
-        <span className="text-green-600">
-          {`+${amount} $`}
-        </span>
-      </p>
+      <div className="flex">
+        <p key={uid}>
+          {name}
+          {' '}
+          <span className="text-green-600">
+            {`+${amount} $`}
+          </span>
+        </p>
+        <button
+          type="button"
+          className="ml-4 border text-sm rounded-md"
+          onClick={() => deleteInvestment(investment, amount)}
+        >
+          delete
+        </button>
+      </div>
     );
   });
 
