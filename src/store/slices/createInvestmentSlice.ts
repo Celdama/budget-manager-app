@@ -90,7 +90,7 @@ const createInvestmentSlice = (
   ) => {
     const { uid, userId, amount, category } = investment;
     const investementsDoc = doc(db, 'users', userId);
-    deleteDoc(doc(db, 'transactions', uid))
+    deleteDoc(doc(db, 'investments', uid))
       .then(() => {
         updateDoc(investementsDoc, {
           investmentsId: arrayRemove(uid),
