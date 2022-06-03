@@ -31,7 +31,8 @@ const Transactions = ({
     }
   }, [authUser]);
 
-  const { displayName, amount, investAmount, photoURL, email } = currentUser;
+  const { displayName, amount: currentUserAmount, investAmount, photoURL, email } = currentUser;
+  const { name, amount, category } = formTransaction;
 
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
@@ -52,7 +53,7 @@ const Transactions = ({
         userId: authUser.uid,
         date: new Date().toString(),
       };
-      addTransaction(newTransaction, amount);
+      addTransaction(newTransaction, currentUserAmount);
       setFormTransaction({
         name: '',
         amount: 0,
@@ -79,7 +80,7 @@ const Transactions = ({
         <button
           type="button"
           className="ml-4 border text-sm rounded-md"
-          onClick={() => deleteTransaction(transaction, currentUser.amount)}
+          onClick={() => deleteTransaction(transaction, amount)}
         >
           delete
         </button>
@@ -100,8 +101,8 @@ const Transactions = ({
         <li>
           <span>amount</span>
           {' '}
-          <span className={`${amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            {amount}
+          <span className={`${currentUserAmount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {currentUserAmount}
             $
           </span>
         </li>
@@ -116,8 +117,8 @@ const Transactions = ({
         <li>
           <span>total amount</span>
           {' '}
-          <span className={`${investAmount + amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            {investAmount + amount}
+          <span className={`${investAmount + currentUserAmount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {investAmount + currentUserAmount}
             $
           </span>
         </li>
@@ -131,20 +132,20 @@ const Transactions = ({
           name="name"
           placeholder="transaction name"
           className="border"
-          value={formTransaction.name}
+          value={name}
           onChange={handleChange}
         />
         <br />
         <input
           type="number"
           name="amount"
-          value={formTransaction.amount}
+          value={amount}
           onChange={handleChange}
         />
         <br />
         <select
           name="category"
-          value={formTransaction.category}
+          value={category}
           onChange={handleChange}
         >
           <option value="">--Please choose a category--</option>
