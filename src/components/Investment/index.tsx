@@ -10,6 +10,7 @@ const Investment = ({
   addInvestment,
   authUser,
   currentUser,
+  deleteInvestment,
 }: InvestmentsProps): JSX.Element => {
   const [formInvestment, setFormInvestment] = useState({
     name: '',
@@ -114,6 +115,7 @@ export const InvestmentStore = (): JSX.Element => {
   const authUser = useStore((state) => state.authUser);
   const currentUser = useStore((state) => state.currentUser);
   const getInvestments = useStore((state) => state.getInvestments);
+  const deleteInvestment = useStore((state) => state.deleteInvestment);
   return (
     <Investment
       investments={investments}
@@ -121,6 +123,7 @@ export const InvestmentStore = (): JSX.Element => {
       getInvestments={getInvestments}
       authUser={authUser}
       currentUser={currentUser}
+      deleteInvestment={deleteInvestment}
     />
   );
 };
