@@ -18,6 +18,7 @@ const Transactions = ({
   transactions,
   currentUser,
 }: TransactionsProps): JSX.Element => {
+  console.log('test commit message template');
   const [formTransaction, setFormTransaction] = useState({
     name: '',
     amount: 0,
