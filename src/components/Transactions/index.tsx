@@ -3,7 +3,7 @@
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
 import { nanoid } from 'nanoid';
-import { MouseEvent, ReactElement, useEffect, useState } from 'react';
+import { MouseEvent, ReactElement, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import useStore from '../../store/useStore';
 import { InvestmentStore } from '../Investment';
@@ -35,7 +35,7 @@ const Transactions = ({
   const { name, amount, category } = formTransaction;
 
   const handleChange = (
-    e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
+    e: FormEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>,
   ): void => {
     const { name, value } = e.target as HTMLInputElement;
     setFormTransaction((prevState) => ({

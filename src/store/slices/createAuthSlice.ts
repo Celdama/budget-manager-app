@@ -21,7 +21,6 @@ const createAuthUserSlice = (
 ) => ({
   isAuthUser: false,
   authUser: <AuthUser>{},
-
   registerUserWithGoogle: () => {
     signInWithPopup(auth, provider)
       .then((result) => {
