@@ -110,7 +110,7 @@ const createInvestmentSlice = (
             ),
           }),
           false,
-          'investmentSlice.deleteinvestment',
+          'investmentSlice.deleteInvestment',
         );
       })
       .catch((error) => {
