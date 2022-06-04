@@ -4,6 +4,6 @@ export const Wrapper = tw.div`
   bg-yellow-400
   flex
   flex-col
-  justify-start
+  justify-star
   items-start
 `;
