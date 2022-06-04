@@ -10,14 +10,14 @@ import { InvestmentStore } from '../Investment';
 import { TransactionsProps } from './Types/transactionsProps';
 
 const Transactions = ({
-  addTransaction,
-  getTransactions,
-  deleteTransaction,
-  setCurrentUser,
-  authUser,
-  transactions,
-  currentUser,
-}: TransactionsProps): JSX.Element => {
+                        addTransaction,
+                        getTransactions,
+                        deleteTransaction,
+                        setCurrentUser,
+                        authUser,
+                        transactions,
+                        currentUser,
+                      }: TransactionsProps): JSX.Element => {
   console.log('test commit message template');
   const [formTransaction, setFormTransaction] = useState({
     name: '',
@@ -71,7 +71,8 @@ const Transactions = ({
           {name}
           {' '}
           <span
-            className={`${category === 'expense'
+            className={`
+            ${category === 'expense'
               ? 'text-red-600'
               : 'text-green-600'}`}
           >
