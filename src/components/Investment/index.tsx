@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, FormEvent, useEffect, useState } from 'react';
 
 import useStore from '../../store/useStore';
 import { InvestmentsProps } from './Types/investmentsProps';
@@ -37,8 +37,8 @@ const Investment = ({
     }));
   };
 
-  const handlaAddInvestment = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  const handleAddInvestment = (
+    e: MouseEvent<HTMLButtonElement>,
   ): void => {
     e.preventDefault();
     if (name.length) {
@@ -108,7 +108,7 @@ const Investment = ({
           <option value="other">other</option>
         </select>
         <br />
-        <button type="submit" onClick={(e) => handlaAddInvestment(e)}>
+        <button type="submit" onClick={(e) => handleAddInvestment(e)}>
           add
         </button>
       </form>
