@@ -1,12 +1,14 @@
-const TransactionsList = (): JSX.Element => {
+import useStore from '../../store/useStore';
+
+const TransactionsList = ({ transactions }): JSX.Element => {
   console.log('transactions list');
   return (
     <div>test</div>);
 };
 
 export const TransactionsListStore = (): JSX.Element => {
-  console.log('from transactionsListStore');
+  const transactions = useStore((state) => state.transactions);
   return (
-    <TransactionsList />
+    <TransactionsList transactions={transactions} />
   );
 };
