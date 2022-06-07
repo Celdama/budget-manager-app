@@ -22,3 +22,10 @@ export const Dashboard = (): JSX.Element => (
     <div className="div8 text-white p-4"><TransactionsListStore /></div>
   </div>
 );
+
+export const DashboardStore = (): JSX.Element => {
+  console.log('dashboard');
+  return (
+    <Dashboard />
+  );
+};
