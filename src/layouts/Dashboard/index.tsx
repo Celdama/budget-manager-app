@@ -1,10 +1,15 @@
 import { useEffect } from 'react';
-import { TransactionsListStore } from '../../components/TransactionsList';
 import useStore from '../../store/useStore';
 import { DashboardProps } from './Types/dashboardProps';
+import { TransactionsList } from '../../components/TransactionsList';
 
-export const Dashboard = ({ authUser, currentUser, getTransactions, transactions }: DashboardProps): JSX.Element => {
-  console.log('test');
+export const Dashboard = ({
+  authUser,
+  currentUser,
+  getTransactions,
+  setCurrentUser,
+  transactions,
+}: DashboardProps): JSX.Element => {
   useEffect(() => {
     if (authUser.email) {
       getTransactions(authUser.uid);
@@ -31,7 +36,7 @@ export const Dashboard = ({ authUser, currentUser, getTransactions, transactions
       </div>
       <div className="div6 text-white p-4">DEPOSIT</div>
       <div className="div7 text-white p-4">INVESTMENT</div>
-      <div className="div8 text-white p-4"><TransactionsListStore /></div>
+      <div className="div8 text-white p-4"><TransactionsList transactions={transactions} /></div>
     </div>
   );
 };
@@ -45,6 +50,7 @@ export const DashboardStore = (): JSX.Element => {
 
   return (
     <Dashboard
+      setCurrentUser={setCurrentUser}
       authUser={authUser}
       currentUser={currentUser}
       getTransactions={getTransactions}
