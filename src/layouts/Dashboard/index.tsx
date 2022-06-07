@@ -1,4 +1,5 @@
 import { TransactionsListStore } from '../../components/TransactionsList';
+import useStore from '../../store/useStore';
 
 export const Dashboard = (): JSX.Element => (
   <div className="parent">
@@ -25,7 +26,13 @@ export const Dashboard = (): JSX.Element => (
 
 export const DashboardStore = (): JSX.Element => {
   console.log('dashboard');
+  const getTransactions = useStore((state) => state.getTransactions);
+  const transactions = useStore((state) => state.transactions);
+
   return (
-    <Dashboard />
+    <Dashboard
+      getTransactions={getTransactions}
+      transactions={transactions}
+    />
   );
 };
