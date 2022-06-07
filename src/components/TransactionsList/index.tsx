@@ -1,7 +1,8 @@
 import useStore from '../../store/useStore';
+import { TransactionsListProps } from './Types/transactionsListProps';
 
-const TransactionsList = ({ transactions }): JSX.Element => {
-  console.log('transactions list');
+const TransactionsList = ({ transactions }: TransactionsListProps): JSX.Element => {
+  console.log(transactions);
   return (
     <div>test</div>);
 };
