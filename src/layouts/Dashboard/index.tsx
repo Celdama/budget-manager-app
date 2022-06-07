@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { TransactionsListStore } from '../../components/TransactionsList';
 import useStore from '../../store/useStore';
 import { DashboardProps } from './Types/dashboardProps';
 
-export const Dashboard = ({ authUser, getTransactions, transactions }: DashboardProps): JSX.Element => {
+export const Dashboard = ({ authUser, currentUser, getTransactions, transactions }: DashboardProps): JSX.Element => {
   console.log('test');
+  useEffect(() => {
+    if (authUser.email) {
+      getTransactions(authUser.uid);
+      setCurrentUser(authUser.uid);
+    }
+  }, [authUser]);
+
   return (
     <div className="parent">
       <div className="div1 text-white p-4">
@@ -30,12 +38,15 @@ export const Dashboard = ({ authUser, getTransactions, transactions }: Dashboard
 
 export const DashboardStore = (): JSX.Element => {
   const authUser = useStore((state) => state.authUser);
+  const currentUser = useStore((state) => state.currentUser);
   const getTransactions = useStore((state) => state.getTransactions);
   const transactions = useStore((state) => state.transactions);
+  const setCurrentUser = useStore((state) => state.setCurrentUser);
 
   return (
     <Dashboard
       authUser={authUser}
+      currentUser={currentUser}
       getTransactions={getTransactions}
       transactions={transactions}
     />

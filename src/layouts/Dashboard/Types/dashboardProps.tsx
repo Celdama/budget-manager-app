@@ -7,4 +7,5 @@ export type DashboardProps = {
   currentUser: User;
   transactions: Transaction[];
   getTransactions: (authUserId: string) => void;
+  setCurrentUser: (userId: string) => void;
 }
