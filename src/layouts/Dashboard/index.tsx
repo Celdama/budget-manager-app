@@ -1,3 +1,5 @@
+import { TransactionsListStore } from '../../components/TransactionsList';
+
 export const Dashboard = (): JSX.Element => (
   <div className="parent">
     <div className="div1 text-white p-4">
@@ -17,6 +19,6 @@ export const Dashboard = (): JSX.Element => (
     </div>
     <div className="div6 text-white p-4">DEPOSIT</div>
     <div className="div7 text-white p-4">INVESTMENT</div>
-    <div className="div8 text-white p-4">TRANSACTION</div>
+    <div className="div8 text-white p-4"><TransactionsListStore /></div>
   </div>
 );
