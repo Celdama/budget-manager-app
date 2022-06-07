@@ -34,3 +34,6 @@ storage.rules
 build
 .firebase
 config
+
+
+.idea
