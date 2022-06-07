@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { TransactionsList } from '../../components/TransactionsList';
 import useStore from '../../store/useStore';
@@ -21,7 +22,10 @@ export const Dashboard = ({
   return (
     <div className="parent">
       <div className="div1 text-white p-4">DASHBOARD + NAVBAR</div>
-      <div className="div2 text-white p-4">LOGIN / LOGOUT</div>
+      <div className="div2 text-white p-4">
+        LOGIN / LOGOUT
+        <Link to="/google">Register</Link>
+      </div>
       <div className="div3 text-white p-4">RESUME</div>
       <div className="div4 text-white p-4">BIG CHART</div>
       <div className="div5 text-white p-4">MY CARD</div>
