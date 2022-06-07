@@ -3,8 +3,12 @@ import { TransactionsListProps } from './Types/transactionsListProps';
 import { TransactionItem } from '../TransactionItem';
 
 export const TransactionsList = ({ transactions }: TransactionsListProps): JSX.Element => {
-  const todayTransactions = transactions.filter((transaction) => isToday(toDate(Date.parse(transaction.date))));
-  const olderTransactions = transactions.filter((transaction) => !isToday(toDate(Date.parse(transaction.date))));
+  const todayTransactions = transactions.filter(
+    ({ date }) => isToday(toDate(Date.parse(date))),
+  );
+  const olderTransactions = transactions.filter(
+    ({ date }) => !isToday(toDate(Date.parse(date))),
+  );
 
   return (
     <>
