@@ -3,22 +3,21 @@
 /* eslint-disable object-curly-newline */
 // eslint-disable-next-line object-curly-newline
 import { nanoid } from 'nanoid';
-import { MouseEvent, ReactElement, ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, ReactElement, useEffect, useState } from 'react';
 
 import useStore from '../../store/useStore';
 import { InvestmentStore } from '../Investment';
 import { TransactionsProps } from './Types/transactionsProps';
 
 const Transactions = ({
-                        addTransaction,
-                        getTransactions,
-                        deleteTransaction,
-                        setCurrentUser,
-                        authUser,
-                        transactions,
-                        currentUser,
-                      }: TransactionsProps): JSX.Element => {
-  console.log('test commit message template');
+  addTransaction,
+  getTransactions,
+  deleteTransaction,
+  setCurrentUser,
+  authUser,
+  transactions,
+  currentUser,
+}: TransactionsProps): JSX.Element => {
   const [formTransaction, setFormTransaction] = useState({
     name: '',
     amount: 0,

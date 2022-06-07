@@ -4,4 +4,9 @@ const TransactionsList = (): JSX.Element => {
     <div>test</div>);
 };
 
-export default TransactionsList;
+export const TransactionsListStore = (): JSX.Element => {
+  console.log('from transactionsListStore');
+  return (
+    <TransactionsList />
+  );
+};
