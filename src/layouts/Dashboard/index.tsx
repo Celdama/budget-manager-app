@@ -34,7 +34,7 @@ export const Dashboard = ({
       <div className="div6 text-white p-4">DEPOSIT</div>
       <div className="div7 text-white p-4">INVESTMENT</div>
       <div className="div8 text-white p-4">
-        <TransactionsList transactions={transactions.slice(0, 5)} />
+        <TransactionsList transactions={transactions.slice(0, 6)} />
       </div>
     </div>
   );
