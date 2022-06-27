@@ -4,16 +4,12 @@ import { TransactionItemProps } from './Types/transactionItemProps';
 export const TransactionItem = ({
   transaction,
 }: TransactionItemProps): JSX.Element => {
-  // console.log(transaction.date);
   const date = new Date(transaction.date);
   const hours = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric' });
-
-  console.log(hours);
 
   return (
     <Wrapper>
       <div className="left">
-        <span className="logo">LOGO</span>
         <p>
           <span>
             {transaction.name}

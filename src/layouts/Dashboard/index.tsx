@@ -19,6 +19,8 @@ export const Dashboard = ({
     }
   }, [authUser]);
 
+  console.log(transactions);
+
   return (
     <div className="parent">
       <div className="div1 text-white p-4">DASHBOARD + NAVBAR</div>
@@ -32,7 +34,7 @@ export const Dashboard = ({
       <div className="div6 text-white p-4">DEPOSIT</div>
       <div className="div7 text-white p-4">INVESTMENT</div>
       <div className="div8 text-white p-4">
-        <TransactionsList transactions={transactions} />
+        <TransactionsList transactions={transactions.slice(0, 5)} />
       </div>
     </div>
   );
