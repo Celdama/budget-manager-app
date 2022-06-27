@@ -19,8 +19,6 @@ export const Dashboard = ({
     }
   }, [authUser]);
 
-  console.log(transactions);
-
   return (
     <div className="parent">
       <div className="div1 text-white p-4">DASHBOARD + NAVBAR</div>
